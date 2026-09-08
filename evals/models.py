@@ -58,3 +58,4 @@ class EvalRun(EvalModel):
     started_at: datetime
     completed_at: datetime
     cases: list[CaseResult]
+    metadata: dict = Field(default_factory=dict)

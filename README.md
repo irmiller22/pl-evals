@@ -8,9 +8,9 @@ An assistant that answers questions about a completed Premier League season prov
 
 ## Project status
 
-Phases 0–4 and the deterministic portion of Phase 5–7 of the [build plan](doc/PLAN.md) are implemented locally: the Python project, reproducible 2024/25 dataset, deterministic football tools, typed analyst responses, an Anthropic model adapter, `POST /ask`, evaluation contracts, an in-process adapter, deterministic graders, JSONL loading, and resilient case execution.
+Phases 0–4 and the deterministic portion of Phase 5–7 of the [build plan](doc/PLAN.md) are implemented locally: the Python project, reproducible 2024/25 dataset, deterministic football tools, typed analyst responses, Anthropic and OpenAI model adapters, `POST /ask`, evaluation contracts, an in-process adapter, deterministic graders, JSONL loading, and resilient case execution.
 
-CI evaluations are still pending. Aggregate metrics, paired case classification, policy threshold evaluation, an independently configurable LLM judge, reproducible smoke/golden/unsupported/adversarial datasets, and JSON/Markdown reporting are implemented and tested. The CLI now supports `run` and `compare`; live provider behavior and model comparison results have not been verified.
+CI evaluations are still pending. Aggregate metrics, paired baseline/candidate execution, case classification, policy threshold evaluation, configurable token pricing, an independently configurable LLM judge, reproducible smoke/golden/unsupported/adversarial datasets, and JSON/Markdown reporting are implemented and tested. The CLI supports `run` and `compare`; live provider behavior and model comparison results have not been verified.
 
 ## Get started
 
@@ -20,11 +20,12 @@ Requires Python 3.12+, `uv`, and `make`. From the repository root:
 make setup
 make ingest
 make check
+make generate-datasets
 make cli
 make serve
 ```
 
-The server listens at `http://127.0.0.1:8000`; `GET /health` returns `{"status":"ok"}`. The evaluation CLI currently exposes `version` only. No API key is needed for tests, ingestion, CLI help, or the health endpoint. `make serve` loads `.env` when present; direct Python execution reads exported environment variables.
+The server listens at `http://127.0.0.1:8000`; `GET /health` returns `{"status":"ok"}`. No API key is needed for tests, ingestion, CLI help, or the health endpoint. `make serve` loads `.env` when present; direct Python execution reads exported environment variables.
 
 The included [dataset documentation](app/data/README.md) identifies the pinned OpenFootball source, CC0 license, checksums, normalization rules, and query semantics. Ingestion runs offline by default; `--download` retrieves the same pinned source again.
 
@@ -63,7 +64,7 @@ All environment-dependent targets use `uv` with `--locked`. `make check` does no
 
 ## Run the analyst
 
-Copy `.env.example` to `.env` and set `ANTHROPIC_API_KEY` and `APP_MODEL` to an exact Anthropic API model ID available to your account. Examples in the template include `claude-sonnet-5` as a balanced starting baseline, `claude-haiku-4-5-20251001` as a faster lower-cost comparison, and `claude-opus-4-8` as a stronger higher-cost comparison. Model IDs change and retire, so verify availability in your account. `APP_MODEL` falls back to `BASELINE_MODEL` when empty. A model ID may optionally start with `anthropic/`. The initial adapter supports Anthropic API IDs; Bedrock-style IDs and other providers will require another implementation of `ModelClient`.
+Copy `.env.example` to `.env` and set `APP_MODEL` plus the matching provider key. Anthropic IDs use `ANTHROPIC_API_KEY` and may optionally start with `anthropic/`; OpenAI IDs use `OPENAI_API_KEY` and may optionally start with `openai/`. Model IDs change and retire, so verify availability in your account. `APP_MODEL` falls back to `BASELINE_MODEL` when empty. The Anthropic adapter supports Claude API IDs (Bedrock-style IDs are not supported); the OpenAI adapter uses the Responses API.
 
 ```bash
 cp .env.example .env
@@ -85,7 +86,7 @@ The analyst validates final JSON against discriminated answer models and require
 
 `ModelConfig` provides a 30-second provider timeout, 120-second application deadline, at most two transient retries, eight model turns, and eight tool calls. In-process callers can override these limits and the system prompt independently for each service. Latency spans model requests, retries, and tool work inside the service; HTTP setup is excluded. Usage aggregates reported tokens across completed model responses, including cache tokens; if a response omits usage, the aggregate is unavailable. Usage from requests that fail before returning a response cannot be measured. Read-only tool work already running in a thread may finish after a request deadline.
 
-The provider wire format follows the [Anthropic Messages API](https://platform.claude.com/docs/en/api/messages/create) and [tool-call lifecycle](https://platform.claude.com/docs/en/agents-and-tools/tool-use/handle-tool-calls). The template also shows planned OpenAI examples such as `gpt-5.4`, `gpt-5-mini`, and `gpt-5-nano`; the OpenAI adapter has not been implemented yet. See the [OpenAI models overview](https://developers.openai.com/api/docs/models) for current IDs and availability.
+The provider wire format follows the [Anthropic Messages API](https://platform.claude.com/docs/en/api/messages/create) or the [OpenAI Responses API](https://developers.openai.com/api/docs/guides/migrate-to-responses). OpenAI model IDs can be prefixed with `openai/` (for example, `openai/gpt-5.4`) and use `OPENAI_API_KEY`; see the [OpenAI models overview](https://developers.openai.com/api/docs/models) for current IDs and availability.
 
 ## Example application
 
@@ -104,6 +105,26 @@ Each response will include answer text, a typed structured answer, attempted too
 The repository will include evaluation definitions, reproducible data preparation, and documentation so others can run comparisons with their own model credentials. Only data permitted for redistribution will be committed, with source attribution, season, and applicable terms documented. Credentials and local environment files must stay out of version control; any published run artifacts must be reviewed for secrets and provider/account metadata.
 
 Published results should identify the exact baseline and candidate model IDs, configuration, dataset version, and run date. Findings describe performance on this suite and configuration; they are not a general ranking of model capability. This is an independent experiment, not an official Premier League project.
+
+## Evaluation commands
+
+`evals run` executes one configured model against a selected JSONL dataset and writes a `run.json` artifact. It requires the model and provider credentials referenced by `evals/eval.yaml`:
+
+```bash
+cp .env.example .env
+# Set BASELINE_MODEL and the matching provider API key in .env.
+evals run --dataset smoke
+```
+
+`evals compare` compares two stored run artifacts by case ID and writes `comparison.json` and `report.md`:
+
+```bash
+evals compare \
+  .evals/runs/<baseline-run-id>/run.json \
+  .evals/runs/<candidate-run-id>/run.json
+```
+
+The paired runner API is available for programmatic baseline/candidate execution; CLI wiring for one command that launches both configurations, policy enforcement, and judge configuration is still pending. Runs involving cases with `groundedness` require injecting the configured LLM judge; otherwise that grade is recorded as unavailable/error rather than silently passing.
 
 ## Planned architecture
 
@@ -141,11 +162,11 @@ Comparisons will classify cases as both passing, both failing, baseline-only pas
 
 ## Planned interface
 
-These commands describe the intended interface; they are not available yet:
+These commands are available unless noted:
 
 ```bash
 python -m evals.cli run --dataset smoke
-python -m evals.cli compare
+python -m evals.cli compare <baseline-run.json> <candidate-run.json>
 python -m evals.cli report <run-id>
 ```
 

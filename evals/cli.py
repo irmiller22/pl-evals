@@ -38,10 +38,10 @@ def run(
     """Run one configured model against a JSONL dataset."""
     settings = EvalConfig.load(config)
     model = settings.model("baseline")
-    from evals.adapters.application import anthropic_adapter
+    from evals.adapters.application import adapter_for_model
 
     async def execute() -> None:
-        async with anthropic_adapter() as adapter:
+        async with adapter_for_model(model) as adapter:
             result = await run_dataset(
                 settings.datasets(dataset),
                 adapter,

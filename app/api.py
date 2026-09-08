@@ -7,7 +7,7 @@ from typing import Annotated
 import httpx
 from fastapi import Depends, FastAPI, HTTPException
 
-from app.agent.model import AnthropicClient
+from app.agent.model import AnthropicClient, OpenAIClient
 from app.agent.service import AgentError, AnalystService
 from app.agent.types import AskRequest, AskResponse
 from app.config import ModelConfig
@@ -25,17 +25,23 @@ def health() -> dict[str, str]:
 async def get_service() -> AsyncIterator[AnalystService]:
     try:
         config = ModelConfig.from_env()
-        key = os.environ.get("ANTHROPIC_API_KEY", "")
+        model_name = config.model.removeprefix("anthropic/")
+        provider = (
+            "openai"
+            if config.model.startswith("openai/") or model_name.startswith(("gpt-", "o"))
+            else "anthropic"
+        )
+        key_name = "OPENAI_API_KEY" if provider == "openai" else "ANTHROPIC_API_KEY"
+        key = os.environ.get(key_name, "")
         if not key.strip():
-            raise ValueError("Set ANTHROPIC_API_KEY to enable the analyst")
+            raise ValueError(f"Set {key_name} to enable the analyst")
     except ValueError:
         raise HTTPException(
-            503, "Configure APP_MODEL (or BASELINE_MODEL) and ANTHROPIC_API_KEY"
+            503, "Configure APP_MODEL (or BASELINE_MODEL) and the selected provider API key"
         ) from None
     async with httpx.AsyncClient() as http:
-        yield AnalystService(
-            AnthropicClient(key, http), FootballTools(FootballRepository()), config
-        )
+        client = OpenAIClient(key, http) if provider == "openai" else AnthropicClient(key, http)
+        yield AnalystService(client, FootballTools(FootballRepository()), config)
 
 
 @app.post("/ask", response_model=AskResponse)
