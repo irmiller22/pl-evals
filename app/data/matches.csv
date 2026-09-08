@@ -1,0 +1,381 @@
+match_id,date,home_team,away_team,home_goals,away_goals,half_time_home_goals,half_time_away_goals,result
+2024-08-16_manchester-united_fulham,2024-08-16,Manchester United,Fulham,1,0,0,0,H
+2024-08-17_arsenal_wolverhampton-wanderers,2024-08-17,Arsenal,Wolverhampton Wanderers,2,0,1,0,H
+2024-08-17_everton_brighton-hove-albion,2024-08-17,Everton,Brighton & Hove Albion,0,3,0,1,A
+2024-08-17_ipswich-town_liverpool,2024-08-17,Ipswich Town,Liverpool,0,2,0,0,A
+2024-08-17_newcastle-united_southampton,2024-08-17,Newcastle United,Southampton,1,0,1,0,H
+2024-08-17_nottingham-forest_afc-bournemouth,2024-08-17,Nottingham Forest,AFC Bournemouth,1,1,1,0,D
+2024-08-17_west-ham-united_aston-villa,2024-08-17,West Ham United,Aston Villa,1,2,1,1,A
+2024-08-18_brentford_crystal-palace,2024-08-18,Brentford,Crystal Palace,2,1,1,0,H
+2024-08-18_chelsea_manchester-city,2024-08-18,Chelsea,Manchester City,0,2,0,1,A
+2024-08-19_leicester-city_tottenham-hotspur,2024-08-19,Leicester City,Tottenham Hotspur,1,1,0,1,D
+2024-08-24_aston-villa_arsenal,2024-08-24,Aston Villa,Arsenal,0,2,0,0,A
+2024-08-24_brighton-hove-albion_manchester-united,2024-08-24,Brighton & Hove Albion,Manchester United,2,1,1,0,H
+2024-08-24_crystal-palace_west-ham-united,2024-08-24,Crystal Palace,West Ham United,0,2,0,0,A
+2024-08-24_fulham_leicester-city,2024-08-24,Fulham,Leicester City,2,1,1,1,H
+2024-08-24_manchester-city_ipswich-town,2024-08-24,Manchester City,Ipswich Town,4,1,3,1,H
+2024-08-24_southampton_nottingham-forest,2024-08-24,Southampton,Nottingham Forest,0,1,0,0,A
+2024-08-24_tottenham-hotspur_everton,2024-08-24,Tottenham Hotspur,Everton,4,0,2,0,H
+2024-08-25_afc-bournemouth_newcastle-united,2024-08-25,AFC Bournemouth,Newcastle United,1,1,1,0,D
+2024-08-25_liverpool_brentford,2024-08-25,Liverpool,Brentford,2,0,1,0,H
+2024-08-25_wolverhampton-wanderers_chelsea,2024-08-25,Wolverhampton Wanderers,Chelsea,2,6,2,2,A
+2024-08-31_arsenal_brighton-hove-albion,2024-08-31,Arsenal,Brighton & Hove Albion,1,1,1,0,D
+2024-08-31_brentford_southampton,2024-08-31,Brentford,Southampton,3,1,1,0,H
+2024-08-31_everton_afc-bournemouth,2024-08-31,Everton,AFC Bournemouth,2,3,0,0,A
+2024-08-31_ipswich-town_fulham,2024-08-31,Ipswich Town,Fulham,1,1,1,1,D
+2024-08-31_leicester-city_aston-villa,2024-08-31,Leicester City,Aston Villa,1,2,0,1,A
+2024-08-31_nottingham-forest_wolverhampton-wanderers,2024-08-31,Nottingham Forest,Wolverhampton Wanderers,1,1,1,1,D
+2024-08-31_west-ham-united_manchester-city,2024-08-31,West Ham United,Manchester City,1,3,1,2,A
+2024-09-01_chelsea_crystal-palace,2024-09-01,Chelsea,Crystal Palace,1,1,1,0,D
+2024-09-01_manchester-united_liverpool,2024-09-01,Manchester United,Liverpool,0,3,0,2,A
+2024-09-01_newcastle-united_tottenham-hotspur,2024-09-01,Newcastle United,Tottenham Hotspur,2,1,1,0,H
+2024-09-14_afc-bournemouth_chelsea,2024-09-14,AFC Bournemouth,Chelsea,0,1,0,0,A
+2024-09-14_aston-villa_everton,2024-09-14,Aston Villa,Everton,3,2,1,2,H
+2024-09-14_brighton-hove-albion_ipswich-town,2024-09-14,Brighton & Hove Albion,Ipswich Town,0,0,0,0,D
+2024-09-14_crystal-palace_leicester-city,2024-09-14,Crystal Palace,Leicester City,2,2,0,1,D
+2024-09-14_fulham_west-ham-united,2024-09-14,Fulham,West Ham United,1,1,1,0,D
+2024-09-14_liverpool_nottingham-forest,2024-09-14,Liverpool,Nottingham Forest,0,1,0,0,A
+2024-09-14_manchester-city_brentford,2024-09-14,Manchester City,Brentford,2,1,2,1,H
+2024-09-14_southampton_manchester-united,2024-09-14,Southampton,Manchester United,0,3,0,2,A
+2024-09-15_tottenham-hotspur_arsenal,2024-09-15,Tottenham Hotspur,Arsenal,0,1,0,0,A
+2024-09-15_wolverhampton-wanderers_newcastle-united,2024-09-15,Wolverhampton Wanderers,Newcastle United,1,2,1,0,A
+2024-09-21_aston-villa_wolverhampton-wanderers,2024-09-21,Aston Villa,Wolverhampton Wanderers,3,1,0,1,H
+2024-09-21_crystal-palace_manchester-united,2024-09-21,Crystal Palace,Manchester United,0,0,0,0,D
+2024-09-21_fulham_newcastle-united,2024-09-21,Fulham,Newcastle United,3,1,2,0,H
+2024-09-21_leicester-city_everton,2024-09-21,Leicester City,Everton,1,1,0,1,D
+2024-09-21_liverpool_afc-bournemouth,2024-09-21,Liverpool,AFC Bournemouth,3,0,3,0,H
+2024-09-21_southampton_ipswich-town,2024-09-21,Southampton,Ipswich Town,1,1,1,0,D
+2024-09-21_tottenham-hotspur_brentford,2024-09-21,Tottenham Hotspur,Brentford,3,1,2,1,H
+2024-09-21_west-ham-united_chelsea,2024-09-21,West Ham United,Chelsea,0,3,0,2,A
+2024-09-22_brighton-hove-albion_nottingham-forest,2024-09-22,Brighton & Hove Albion,Nottingham Forest,2,2,2,1,D
+2024-09-22_manchester-city_arsenal,2024-09-22,Manchester City,Arsenal,2,2,1,2,D
+2024-09-28_arsenal_leicester-city,2024-09-28,Arsenal,Leicester City,4,2,2,0,H
+2024-09-28_brentford_west-ham-united,2024-09-28,Brentford,West Ham United,1,1,1,0,D
+2024-09-28_chelsea_brighton-hove-albion,2024-09-28,Chelsea,Brighton & Hove Albion,4,2,4,2,H
+2024-09-28_everton_crystal-palace,2024-09-28,Everton,Crystal Palace,2,1,0,1,H
+2024-09-28_newcastle-united_manchester-city,2024-09-28,Newcastle United,Manchester City,1,1,0,1,D
+2024-09-28_nottingham-forest_fulham,2024-09-28,Nottingham Forest,Fulham,0,1,0,0,A
+2024-09-28_wolverhampton-wanderers_liverpool,2024-09-28,Wolverhampton Wanderers,Liverpool,1,2,0,1,A
+2024-09-29_ipswich-town_aston-villa,2024-09-29,Ipswich Town,Aston Villa,2,2,1,2,D
+2024-09-29_manchester-united_tottenham-hotspur,2024-09-29,Manchester United,Tottenham Hotspur,0,3,0,1,A
+2024-09-30_afc-bournemouth_southampton,2024-09-30,AFC Bournemouth,Southampton,3,1,3,0,H
+2024-10-05_arsenal_southampton,2024-10-05,Arsenal,Southampton,3,1,0,0,H
+2024-10-05_brentford_wolverhampton-wanderers,2024-10-05,Brentford,Wolverhampton Wanderers,5,3,4,2,H
+2024-10-05_crystal-palace_liverpool,2024-10-05,Crystal Palace,Liverpool,0,1,0,1,A
+2024-10-05_everton_newcastle-united,2024-10-05,Everton,Newcastle United,0,0,0,0,D
+2024-10-05_leicester-city_afc-bournemouth,2024-10-05,Leicester City,AFC Bournemouth,1,0,1,0,H
+2024-10-05_manchester-city_fulham,2024-10-05,Manchester City,Fulham,3,2,1,1,H
+2024-10-05_west-ham-united_ipswich-town,2024-10-05,West Ham United,Ipswich Town,4,1,2,1,H
+2024-10-06_aston-villa_manchester-united,2024-10-06,Aston Villa,Manchester United,0,0,0,0,D
+2024-10-06_brighton-hove-albion_tottenham-hotspur,2024-10-06,Brighton & Hove Albion,Tottenham Hotspur,3,2,0,2,H
+2024-10-06_chelsea_nottingham-forest,2024-10-06,Chelsea,Nottingham Forest,1,1,0,0,D
+2024-10-19_afc-bournemouth_arsenal,2024-10-19,AFC Bournemouth,Arsenal,2,0,0,0,H
+2024-10-19_fulham_aston-villa,2024-10-19,Fulham,Aston Villa,1,3,1,1,A
+2024-10-19_ipswich-town_everton,2024-10-19,Ipswich Town,Everton,0,2,0,2,A
+2024-10-19_manchester-united_brentford,2024-10-19,Manchester United,Brentford,2,1,0,1,H
+2024-10-19_newcastle-united_brighton-hove-albion,2024-10-19,Newcastle United,Brighton & Hove Albion,0,1,0,1,A
+2024-10-19_southampton_leicester-city,2024-10-19,Southampton,Leicester City,2,3,2,0,A
+2024-10-19_tottenham-hotspur_west-ham-united,2024-10-19,Tottenham Hotspur,West Ham United,4,1,1,1,H
+2024-10-20_liverpool_chelsea,2024-10-20,Liverpool,Chelsea,2,1,1,0,H
+2024-10-20_wolverhampton-wanderers_manchester-city,2024-10-20,Wolverhampton Wanderers,Manchester City,1,2,1,1,A
+2024-10-21_nottingham-forest_crystal-palace,2024-10-21,Nottingham Forest,Crystal Palace,1,0,0,0,H
+2024-10-25_leicester-city_nottingham-forest,2024-10-25,Leicester City,Nottingham Forest,1,3,1,1,A
+2024-10-26_aston-villa_afc-bournemouth,2024-10-26,Aston Villa,AFC Bournemouth,1,1,0,0,D
+2024-10-26_brentford_ipswich-town,2024-10-26,Brentford,Ipswich Town,4,3,2,2,H
+2024-10-26_brighton-hove-albion_wolverhampton-wanderers,2024-10-26,Brighton & Hove Albion,Wolverhampton Wanderers,2,2,1,0,D
+2024-10-26_everton_fulham,2024-10-26,Everton,Fulham,1,1,0,0,D
+2024-10-26_manchester-city_southampton,2024-10-26,Manchester City,Southampton,1,0,1,0,H
+2024-10-27_arsenal_liverpool,2024-10-27,Arsenal,Liverpool,2,2,2,1,D
+2024-10-27_chelsea_newcastle-united,2024-10-27,Chelsea,Newcastle United,2,1,1,1,H
+2024-10-27_crystal-palace_tottenham-hotspur,2024-10-27,Crystal Palace,Tottenham Hotspur,1,0,1,0,H
+2024-10-27_west-ham-united_manchester-united,2024-10-27,West Ham United,Manchester United,2,1,0,0,H
+2024-11-02_afc-bournemouth_manchester-city,2024-11-02,AFC Bournemouth,Manchester City,2,1,1,0,H
+2024-11-02_ipswich-town_leicester-city,2024-11-02,Ipswich Town,Leicester City,1,1,0,0,D
+2024-11-02_liverpool_brighton-hove-albion,2024-11-02,Liverpool,Brighton & Hove Albion,2,1,0,1,H
+2024-11-02_newcastle-united_arsenal,2024-11-02,Newcastle United,Arsenal,1,0,1,0,H
+2024-11-02_nottingham-forest_west-ham-united,2024-11-02,Nottingham Forest,West Ham United,3,0,1,0,H
+2024-11-02_southampton_everton,2024-11-02,Southampton,Everton,1,0,0,0,H
+2024-11-02_wolverhampton-wanderers_crystal-palace,2024-11-02,Wolverhampton Wanderers,Crystal Palace,2,2,0,0,D
+2024-11-03_manchester-united_chelsea,2024-11-03,Manchester United,Chelsea,1,1,0,0,D
+2024-11-03_tottenham-hotspur_aston-villa,2024-11-03,Tottenham Hotspur,Aston Villa,4,1,0,1,H
+2024-11-04_fulham_brentford,2024-11-04,Fulham,Brentford,2,1,0,1,H
+2024-11-09_brentford_afc-bournemouth,2024-11-09,Brentford,AFC Bournemouth,3,2,1,1,H
+2024-11-09_brighton-hove-albion_manchester-city,2024-11-09,Brighton & Hove Albion,Manchester City,2,1,0,1,H
+2024-11-09_crystal-palace_fulham,2024-11-09,Crystal Palace,Fulham,0,2,0,1,A
+2024-11-09_liverpool_aston-villa,2024-11-09,Liverpool,Aston Villa,2,0,1,0,H
+2024-11-09_west-ham-united_everton,2024-11-09,West Ham United,Everton,0,0,0,0,D
+2024-11-09_wolverhampton-wanderers_southampton,2024-11-09,Wolverhampton Wanderers,Southampton,2,0,1,0,H
+2024-11-10_chelsea_arsenal,2024-11-10,Chelsea,Arsenal,1,1,0,0,D
+2024-11-10_manchester-united_leicester-city,2024-11-10,Manchester United,Leicester City,3,0,2,0,H
+2024-11-10_nottingham-forest_newcastle-united,2024-11-10,Nottingham Forest,Newcastle United,1,3,1,0,A
+2024-11-10_tottenham-hotspur_ipswich-town,2024-11-10,Tottenham Hotspur,Ipswich Town,1,2,0,2,A
+2024-11-23_afc-bournemouth_brighton-hove-albion,2024-11-23,AFC Bournemouth,Brighton & Hove Albion,1,2,0,1,A
+2024-11-23_arsenal_nottingham-forest,2024-11-23,Arsenal,Nottingham Forest,3,0,1,0,H
+2024-11-23_aston-villa_crystal-palace,2024-11-23,Aston Villa,Crystal Palace,2,2,1,2,D
+2024-11-23_everton_brentford,2024-11-23,Everton,Brentford,0,0,0,0,D
+2024-11-23_fulham_wolverhampton-wanderers,2024-11-23,Fulham,Wolverhampton Wanderers,1,4,1,1,A
+2024-11-23_leicester-city_chelsea,2024-11-23,Leicester City,Chelsea,1,2,0,1,A
+2024-11-23_manchester-city_tottenham-hotspur,2024-11-23,Manchester City,Tottenham Hotspur,0,4,0,2,A
+2024-11-24_ipswich-town_manchester-united,2024-11-24,Ipswich Town,Manchester United,1,1,1,1,D
+2024-11-24_southampton_liverpool,2024-11-24,Southampton,Liverpool,2,3,1,1,A
+2024-11-25_newcastle-united_west-ham-united,2024-11-25,Newcastle United,West Ham United,0,2,0,1,A
+2024-11-29_brighton-hove-albion_southampton,2024-11-29,Brighton & Hove Albion,Southampton,1,1,1,0,D
+2024-11-30_brentford_leicester-city,2024-11-30,Brentford,Leicester City,4,1,3,1,H
+2024-11-30_crystal-palace_newcastle-united,2024-11-30,Crystal Palace,Newcastle United,1,1,0,0,D
+2024-11-30_nottingham-forest_ipswich-town,2024-11-30,Nottingham Forest,Ipswich Town,1,0,0,0,H
+2024-11-30_west-ham-united_arsenal,2024-11-30,West Ham United,Arsenal,2,5,2,5,A
+2024-11-30_wolverhampton-wanderers_afc-bournemouth,2024-11-30,Wolverhampton Wanderers,AFC Bournemouth,2,4,1,3,A
+2024-12-01_chelsea_aston-villa,2024-12-01,Chelsea,Aston Villa,3,0,2,0,H
+2024-12-01_liverpool_manchester-city,2024-12-01,Liverpool,Manchester City,2,0,1,0,H
+2024-12-01_manchester-united_everton,2024-12-01,Manchester United,Everton,4,0,2,0,H
+2024-12-01_tottenham-hotspur_fulham,2024-12-01,Tottenham Hotspur,Fulham,1,1,0,0,D
+2024-12-03_ipswich-town_crystal-palace,2024-12-03,Ipswich Town,Crystal Palace,0,1,0,0,A
+2024-12-03_leicester-city_west-ham-united,2024-12-03,Leicester City,West Ham United,3,1,1,0,H
+2024-12-04_arsenal_manchester-united,2024-12-04,Arsenal,Manchester United,2,0,0,0,H
+2024-12-04_aston-villa_brentford,2024-12-04,Aston Villa,Brentford,3,1,3,0,H
+2024-12-04_everton_wolverhampton-wanderers,2024-12-04,Everton,Wolverhampton Wanderers,4,0,2,0,H
+2024-12-04_manchester-city_nottingham-forest,2024-12-04,Manchester City,Nottingham Forest,3,0,2,0,H
+2024-12-04_newcastle-united_liverpool,2024-12-04,Newcastle United,Liverpool,3,3,1,0,D
+2024-12-04_southampton_chelsea,2024-12-04,Southampton,Chelsea,1,5,1,3,A
+2024-12-05_afc-bournemouth_tottenham-hotspur,2024-12-05,AFC Bournemouth,Tottenham Hotspur,1,0,1,0,H
+2024-12-05_fulham_brighton-hove-albion,2024-12-05,Fulham,Brighton & Hove Albion,3,1,1,0,H
+2024-12-07_aston-villa_southampton,2024-12-07,Aston Villa,Southampton,1,0,1,0,H
+2024-12-07_brentford_newcastle-united,2024-12-07,Brentford,Newcastle United,4,2,2,2,H
+2024-12-07_crystal-palace_manchester-city,2024-12-07,Crystal Palace,Manchester City,2,2,1,1,D
+2024-12-07_manchester-united_nottingham-forest,2024-12-07,Manchester United,Nottingham Forest,2,3,1,1,A
+2024-12-08_fulham_arsenal,2024-12-08,Fulham,Arsenal,1,1,1,0,D
+2024-12-08_ipswich-town_afc-bournemouth,2024-12-08,Ipswich Town,AFC Bournemouth,1,2,1,0,A
+2024-12-08_leicester-city_brighton-hove-albion,2024-12-08,Leicester City,Brighton & Hove Albion,2,2,0,1,D
+2024-12-08_tottenham-hotspur_chelsea,2024-12-08,Tottenham Hotspur,Chelsea,3,4,2,1,A
+2024-12-09_west-ham-united_wolverhampton-wanderers,2024-12-09,West Ham United,Wolverhampton Wanderers,2,1,0,0,H
+2024-12-14_arsenal_everton,2024-12-14,Arsenal,Everton,0,0,0,0,D
+2024-12-14_liverpool_fulham,2024-12-14,Liverpool,Fulham,2,2,0,1,D
+2024-12-14_newcastle-united_leicester-city,2024-12-14,Newcastle United,Leicester City,4,0,1,0,H
+2024-12-14_nottingham-forest_aston-villa,2024-12-14,Nottingham Forest,Aston Villa,2,1,0,0,H
+2024-12-14_wolverhampton-wanderers_ipswich-town,2024-12-14,Wolverhampton Wanderers,Ipswich Town,1,2,0,1,A
+2024-12-15_brighton-hove-albion_crystal-palace,2024-12-15,Brighton & Hove Albion,Crystal Palace,1,3,0,2,A
+2024-12-15_chelsea_brentford,2024-12-15,Chelsea,Brentford,2,1,1,0,H
+2024-12-15_manchester-city_manchester-united,2024-12-15,Manchester City,Manchester United,1,2,1,0,A
+2024-12-15_southampton_tottenham-hotspur,2024-12-15,Southampton,Tottenham Hotspur,0,5,0,5,A
+2024-12-16_afc-bournemouth_west-ham-united,2024-12-16,AFC Bournemouth,West Ham United,1,1,0,0,D
+2024-12-21_aston-villa_manchester-city,2024-12-21,Aston Villa,Manchester City,2,1,1,0,H
+2024-12-21_brentford_nottingham-forest,2024-12-21,Brentford,Nottingham Forest,0,2,0,1,A
+2024-12-21_crystal-palace_arsenal,2024-12-21,Crystal Palace,Arsenal,1,5,1,3,A
+2024-12-21_ipswich-town_newcastle-united,2024-12-21,Ipswich Town,Newcastle United,0,4,0,3,A
+2024-12-21_west-ham-united_brighton-hove-albion,2024-12-21,West Ham United,Brighton & Hove Albion,1,1,0,0,D
+2024-12-22_everton_chelsea,2024-12-22,Everton,Chelsea,0,0,0,0,D
+2024-12-22_fulham_southampton,2024-12-22,Fulham,Southampton,0,0,0,0,D
+2024-12-22_leicester-city_wolverhampton-wanderers,2024-12-22,Leicester City,Wolverhampton Wanderers,0,3,0,3,A
+2024-12-22_manchester-united_afc-bournemouth,2024-12-22,Manchester United,AFC Bournemouth,0,3,0,1,A
+2024-12-22_tottenham-hotspur_liverpool,2024-12-22,Tottenham Hotspur,Liverpool,3,6,1,3,A
+2024-12-26_afc-bournemouth_crystal-palace,2024-12-26,AFC Bournemouth,Crystal Palace,0,0,0,0,D
+2024-12-26_chelsea_fulham,2024-12-26,Chelsea,Fulham,1,2,1,0,A
+2024-12-26_liverpool_leicester-city,2024-12-26,Liverpool,Leicester City,3,1,1,1,H
+2024-12-26_manchester-city_everton,2024-12-26,Manchester City,Everton,1,1,1,1,D
+2024-12-26_newcastle-united_aston-villa,2024-12-26,Newcastle United,Aston Villa,3,0,1,0,H
+2024-12-26_nottingham-forest_tottenham-hotspur,2024-12-26,Nottingham Forest,Tottenham Hotspur,1,0,1,0,H
+2024-12-26_southampton_west-ham-united,2024-12-26,Southampton,West Ham United,0,1,0,0,A
+2024-12-26_wolverhampton-wanderers_manchester-united,2024-12-26,Wolverhampton Wanderers,Manchester United,2,0,0,0,H
+2024-12-27_arsenal_ipswich-town,2024-12-27,Arsenal,Ipswich Town,1,0,1,0,H
+2024-12-27_brighton-hove-albion_brentford,2024-12-27,Brighton & Hove Albion,Brentford,0,0,0,0,D
+2024-12-29_crystal-palace_southampton,2024-12-29,Crystal Palace,Southampton,2,1,1,1,H
+2024-12-29_everton_nottingham-forest,2024-12-29,Everton,Nottingham Forest,0,2,0,1,A
+2024-12-29_fulham_afc-bournemouth,2024-12-29,Fulham,AFC Bournemouth,2,2,1,0,D
+2024-12-29_leicester-city_manchester-city,2024-12-29,Leicester City,Manchester City,0,2,0,1,A
+2024-12-29_tottenham-hotspur_wolverhampton-wanderers,2024-12-29,Tottenham Hotspur,Wolverhampton Wanderers,2,2,2,1,D
+2024-12-29_west-ham-united_liverpool,2024-12-29,West Ham United,Liverpool,0,5,0,3,A
+2024-12-30_aston-villa_brighton-hove-albion,2024-12-30,Aston Villa,Brighton & Hove Albion,2,2,1,1,D
+2024-12-30_ipswich-town_chelsea,2024-12-30,Ipswich Town,Chelsea,2,0,1,0,H
+2024-12-30_manchester-united_newcastle-united,2024-12-30,Manchester United,Newcastle United,0,2,0,2,A
+2025-01-01_brentford_arsenal,2025-01-01,Brentford,Arsenal,1,3,1,1,A
+2025-01-04_afc-bournemouth_everton,2025-01-04,AFC Bournemouth,Everton,1,0,0,0,H
+2025-01-04_aston-villa_leicester-city,2025-01-04,Aston Villa,Leicester City,2,1,0,0,H
+2025-01-04_brighton-hove-albion_arsenal,2025-01-04,Brighton & Hove Albion,Arsenal,1,1,0,1,D
+2025-01-04_crystal-palace_chelsea,2025-01-04,Crystal Palace,Chelsea,1,1,0,1,D
+2025-01-04_manchester-city_west-ham-united,2025-01-04,Manchester City,West Ham United,4,1,2,0,H
+2025-01-04_southampton_brentford,2025-01-04,Southampton,Brentford,0,5,0,1,A
+2025-01-04_tottenham-hotspur_newcastle-united,2025-01-04,Tottenham Hotspur,Newcastle United,1,2,1,2,A
+2025-01-05_fulham_ipswich-town,2025-01-05,Fulham,Ipswich Town,2,2,0,1,D
+2025-01-05_liverpool_manchester-united,2025-01-05,Liverpool,Manchester United,2,2,0,0,D
+2025-01-06_wolverhampton-wanderers_nottingham-forest,2025-01-06,Wolverhampton Wanderers,Nottingham Forest,0,3,0,2,A
+2025-01-14_brentford_manchester-city,2025-01-14,Brentford,Manchester City,2,2,0,0,D
+2025-01-14_chelsea_afc-bournemouth,2025-01-14,Chelsea,AFC Bournemouth,2,2,1,0,D
+2025-01-14_nottingham-forest_liverpool,2025-01-14,Nottingham Forest,Liverpool,1,1,1,0,D
+2025-01-14_west-ham-united_fulham,2025-01-14,West Ham United,Fulham,3,2,2,0,H
+2025-01-15_arsenal_tottenham-hotspur,2025-01-15,Arsenal,Tottenham Hotspur,2,1,2,1,H
+2025-01-15_everton_aston-villa,2025-01-15,Everton,Aston Villa,0,1,0,0,A
+2025-01-15_leicester-city_crystal-palace,2025-01-15,Leicester City,Crystal Palace,0,2,0,0,A
+2025-01-15_newcastle-united_wolverhampton-wanderers,2025-01-15,Newcastle United,Wolverhampton Wanderers,3,0,1,0,H
+2025-01-16_ipswich-town_brighton-hove-albion,2025-01-16,Ipswich Town,Brighton & Hove Albion,0,2,0,0,A
+2025-01-16_manchester-united_southampton,2025-01-16,Manchester United,Southampton,3,1,0,1,H
+2025-01-18_arsenal_aston-villa,2025-01-18,Arsenal,Aston Villa,2,2,1,0,D
+2025-01-18_brentford_liverpool,2025-01-18,Brentford,Liverpool,0,2,0,0,A
+2025-01-18_leicester-city_fulham,2025-01-18,Leicester City,Fulham,0,2,0,0,A
+2025-01-18_newcastle-united_afc-bournemouth,2025-01-18,Newcastle United,AFC Bournemouth,1,4,1,2,A
+2025-01-18_west-ham-united_crystal-palace,2025-01-18,West Ham United,Crystal Palace,0,2,0,0,A
+2025-01-19_everton_tottenham-hotspur,2025-01-19,Everton,Tottenham Hotspur,3,2,3,0,H
+2025-01-19_ipswich-town_manchester-city,2025-01-19,Ipswich Town,Manchester City,0,6,0,3,A
+2025-01-19_manchester-united_brighton-hove-albion,2025-01-19,Manchester United,Brighton & Hove Albion,1,3,1,1,A
+2025-01-19_nottingham-forest_southampton,2025-01-19,Nottingham Forest,Southampton,3,2,3,0,H
+2025-01-20_chelsea_wolverhampton-wanderers,2025-01-20,Chelsea,Wolverhampton Wanderers,3,1,1,1,H
+2025-01-25_afc-bournemouth_nottingham-forest,2025-01-25,AFC Bournemouth,Nottingham Forest,5,0,1,0,H
+2025-01-25_brighton-hove-albion_everton,2025-01-25,Brighton & Hove Albion,Everton,0,1,0,1,A
+2025-01-25_liverpool_ipswich-town,2025-01-25,Liverpool,Ipswich Town,4,1,3,0,H
+2025-01-25_manchester-city_chelsea,2025-01-25,Manchester City,Chelsea,3,1,1,1,H
+2025-01-25_southampton_newcastle-united,2025-01-25,Southampton,Newcastle United,1,3,1,2,A
+2025-01-25_wolverhampton-wanderers_arsenal,2025-01-25,Wolverhampton Wanderers,Arsenal,0,1,0,0,A
+2025-01-26_aston-villa_west-ham-united,2025-01-26,Aston Villa,West Ham United,1,1,1,0,D
+2025-01-26_crystal-palace_brentford,2025-01-26,Crystal Palace,Brentford,1,2,0,0,A
+2025-01-26_fulham_manchester-united,2025-01-26,Fulham,Manchester United,0,1,0,0,A
+2025-01-26_tottenham-hotspur_leicester-city,2025-01-26,Tottenham Hotspur,Leicester City,1,2,1,0,A
+2025-02-01_afc-bournemouth_liverpool,2025-02-01,AFC Bournemouth,Liverpool,0,2,0,1,A
+2025-02-01_everton_leicester-city,2025-02-01,Everton,Leicester City,4,0,3,0,H
+2025-02-01_ipswich-town_southampton,2025-02-01,Ipswich Town,Southampton,1,2,1,1,A
+2025-02-01_newcastle-united_fulham,2025-02-01,Newcastle United,Fulham,1,2,1,0,A
+2025-02-01_nottingham-forest_brighton-hove-albion,2025-02-01,Nottingham Forest,Brighton & Hove Albion,7,0,3,0,H
+2025-02-01_wolverhampton-wanderers_aston-villa,2025-02-01,Wolverhampton Wanderers,Aston Villa,2,0,1,0,H
+2025-02-02_arsenal_manchester-city,2025-02-02,Arsenal,Manchester City,5,1,1,0,H
+2025-02-02_brentford_tottenham-hotspur,2025-02-02,Brentford,Tottenham Hotspur,0,2,0,1,A
+2025-02-02_manchester-united_crystal-palace,2025-02-02,Manchester United,Crystal Palace,0,2,0,0,A
+2025-02-03_chelsea_west-ham-united,2025-02-03,Chelsea,West Ham United,2,1,0,1,H
+2025-02-12_everton_liverpool,2025-02-12,Everton,Liverpool,2,2,1,1,D
+2025-02-14_brighton-hove-albion_chelsea,2025-02-14,Brighton & Hove Albion,Chelsea,3,0,2,0,H
+2025-02-15_aston-villa_ipswich-town,2025-02-15,Aston Villa,Ipswich Town,1,1,0,0,D
+2025-02-15_crystal-palace_everton,2025-02-15,Crystal Palace,Everton,1,2,0,1,A
+2025-02-15_fulham_nottingham-forest,2025-02-15,Fulham,Nottingham Forest,2,1,1,1,H
+2025-02-15_leicester-city_arsenal,2025-02-15,Leicester City,Arsenal,0,2,0,0,A
+2025-02-15_manchester-city_newcastle-united,2025-02-15,Manchester City,Newcastle United,4,0,3,0,H
+2025-02-15_southampton_afc-bournemouth,2025-02-15,Southampton,AFC Bournemouth,1,3,0,2,A
+2025-02-15_west-ham-united_brentford,2025-02-15,West Ham United,Brentford,0,1,0,1,A
+2025-02-16_liverpool_wolverhampton-wanderers,2025-02-16,Liverpool,Wolverhampton Wanderers,2,1,2,0,H
+2025-02-16_tottenham-hotspur_manchester-united,2025-02-16,Tottenham Hotspur,Manchester United,1,0,1,0,H
+2025-02-19_aston-villa_liverpool,2025-02-19,Aston Villa,Liverpool,2,2,2,1,D
+2025-02-21_leicester-city_brentford,2025-02-21,Leicester City,Brentford,0,4,0,3,A
+2025-02-22_afc-bournemouth_wolverhampton-wanderers,2025-02-22,AFC Bournemouth,Wolverhampton Wanderers,0,1,0,1,A
+2025-02-22_arsenal_west-ham-united,2025-02-22,Arsenal,West Ham United,0,1,0,1,A
+2025-02-22_aston-villa_chelsea,2025-02-22,Aston Villa,Chelsea,2,1,0,1,H
+2025-02-22_everton_manchester-united,2025-02-22,Everton,Manchester United,2,2,2,0,D
+2025-02-22_fulham_crystal-palace,2025-02-22,Fulham,Crystal Palace,0,2,0,1,A
+2025-02-22_ipswich-town_tottenham-hotspur,2025-02-22,Ipswich Town,Tottenham Hotspur,1,4,1,2,A
+2025-02-22_southampton_brighton-hove-albion,2025-02-22,Southampton,Brighton & Hove Albion,0,4,0,1,A
+2025-02-23_manchester-city_liverpool,2025-02-23,Manchester City,Liverpool,0,2,0,2,A
+2025-02-23_newcastle-united_nottingham-forest,2025-02-23,Newcastle United,Nottingham Forest,4,3,4,1,H
+2025-02-25_brighton-hove-albion_afc-bournemouth,2025-02-25,Brighton & Hove Albion,AFC Bournemouth,2,1,1,0,H
+2025-02-25_chelsea_southampton,2025-02-25,Chelsea,Southampton,4,0,3,0,H
+2025-02-25_crystal-palace_aston-villa,2025-02-25,Crystal Palace,Aston Villa,4,1,1,0,H
+2025-02-25_wolverhampton-wanderers_fulham,2025-02-25,Wolverhampton Wanderers,Fulham,1,2,1,1,A
+2025-02-26_brentford_everton,2025-02-26,Brentford,Everton,1,1,1,0,D
+2025-02-26_liverpool_newcastle-united,2025-02-26,Liverpool,Newcastle United,2,0,1,0,H
+2025-02-26_manchester-united_ipswich-town,2025-02-26,Manchester United,Ipswich Town,3,2,2,2,H
+2025-02-26_nottingham-forest_arsenal,2025-02-26,Nottingham Forest,Arsenal,0,0,0,0,D
+2025-02-26_tottenham-hotspur_manchester-city,2025-02-26,Tottenham Hotspur,Manchester City,0,1,0,1,A
+2025-02-27_west-ham-united_leicester-city,2025-02-27,West Ham United,Leicester City,2,0,2,0,H
+2025-03-08_brentford_aston-villa,2025-03-08,Brentford,Aston Villa,0,1,0,0,A
+2025-03-08_brighton-hove-albion_fulham,2025-03-08,Brighton & Hove Albion,Fulham,2,1,1,1,H
+2025-03-08_crystal-palace_ipswich-town,2025-03-08,Crystal Palace,Ipswich Town,1,0,0,0,H
+2025-03-08_liverpool_southampton,2025-03-08,Liverpool,Southampton,3,1,0,1,H
+2025-03-08_nottingham-forest_manchester-city,2025-03-08,Nottingham Forest,Manchester City,1,0,0,0,H
+2025-03-08_wolverhampton-wanderers_everton,2025-03-08,Wolverhampton Wanderers,Everton,1,1,1,1,D
+2025-03-09_chelsea_leicester-city,2025-03-09,Chelsea,Leicester City,1,0,0,0,H
+2025-03-09_manchester-united_arsenal,2025-03-09,Manchester United,Arsenal,1,1,1,0,D
+2025-03-09_tottenham-hotspur_afc-bournemouth,2025-03-09,Tottenham Hotspur,AFC Bournemouth,2,2,0,1,D
+2025-03-10_west-ham-united_newcastle-united,2025-03-10,West Ham United,Newcastle United,0,1,0,0,A
+2025-03-15_afc-bournemouth_brentford,2025-03-15,AFC Bournemouth,Brentford,1,2,1,1,A
+2025-03-15_everton_west-ham-united,2025-03-15,Everton,West Ham United,1,1,0,0,D
+2025-03-15_ipswich-town_nottingham-forest,2025-03-15,Ipswich Town,Nottingham Forest,2,4,0,3,A
+2025-03-15_manchester-city_brighton-hove-albion,2025-03-15,Manchester City,Brighton & Hove Albion,2,2,2,1,D
+2025-03-15_southampton_wolverhampton-wanderers,2025-03-15,Southampton,Wolverhampton Wanderers,1,2,0,1,A
+2025-03-16_arsenal_chelsea,2025-03-16,Arsenal,Chelsea,1,0,1,0,H
+2025-03-16_fulham_tottenham-hotspur,2025-03-16,Fulham,Tottenham Hotspur,2,0,0,0,H
+2025-03-16_leicester-city_manchester-united,2025-03-16,Leicester City,Manchester United,0,3,0,1,A
+2025-04-01_arsenal_fulham,2025-04-01,Arsenal,Fulham,2,1,1,0,H
+2025-04-01_nottingham-forest_manchester-united,2025-04-01,Nottingham Forest,Manchester United,1,0,1,0,H
+2025-04-01_wolverhampton-wanderers_west-ham-united,2025-04-01,Wolverhampton Wanderers,West Ham United,1,0,1,0,H
+2025-04-02_afc-bournemouth_ipswich-town,2025-04-02,AFC Bournemouth,Ipswich Town,1,2,0,1,A
+2025-04-02_brighton-hove-albion_aston-villa,2025-04-02,Brighton & Hove Albion,Aston Villa,0,3,0,0,A
+2025-04-02_liverpool_everton,2025-04-02,Liverpool,Everton,1,0,0,0,H
+2025-04-02_manchester-city_leicester-city,2025-04-02,Manchester City,Leicester City,2,0,2,0,H
+2025-04-02_newcastle-united_brentford,2025-04-02,Newcastle United,Brentford,2,1,1,0,H
+2025-04-02_southampton_crystal-palace,2025-04-02,Southampton,Crystal Palace,1,1,1,0,D
+2025-04-03_chelsea_tottenham-hotspur,2025-04-03,Chelsea,Tottenham Hotspur,1,0,0,0,H
+2025-04-05_aston-villa_nottingham-forest,2025-04-05,Aston Villa,Nottingham Forest,2,1,2,0,H
+2025-04-05_crystal-palace_brighton-hove-albion,2025-04-05,Crystal Palace,Brighton & Hove Albion,2,1,1,1,H
+2025-04-05_everton_arsenal,2025-04-05,Everton,Arsenal,1,1,0,1,D
+2025-04-05_ipswich-town_wolverhampton-wanderers,2025-04-05,Ipswich Town,Wolverhampton Wanderers,1,2,1,0,A
+2025-04-05_west-ham-united_afc-bournemouth,2025-04-05,West Ham United,AFC Bournemouth,2,2,0,1,D
+2025-04-06_brentford_chelsea,2025-04-06,Brentford,Chelsea,0,0,0,0,D
+2025-04-06_fulham_liverpool,2025-04-06,Fulham,Liverpool,3,2,3,1,H
+2025-04-06_manchester-united_manchester-city,2025-04-06,Manchester United,Manchester City,0,0,0,0,D
+2025-04-06_tottenham-hotspur_southampton,2025-04-06,Tottenham Hotspur,Southampton,3,1,2,0,H
+2025-04-07_leicester-city_newcastle-united,2025-04-07,Leicester City,Newcastle United,0,3,0,3,A
+2025-04-12_arsenal_brentford,2025-04-12,Arsenal,Brentford,1,1,0,0,D
+2025-04-12_brighton-hove-albion_leicester-city,2025-04-12,Brighton & Hove Albion,Leicester City,2,2,1,1,D
+2025-04-12_manchester-city_crystal-palace,2025-04-12,Manchester City,Crystal Palace,5,2,2,2,H
+2025-04-12_nottingham-forest_everton,2025-04-12,Nottingham Forest,Everton,0,1,0,0,A
+2025-04-12_southampton_aston-villa,2025-04-12,Southampton,Aston Villa,0,3,0,0,A
+2025-04-13_chelsea_ipswich-town,2025-04-13,Chelsea,Ipswich Town,2,2,0,2,D
+2025-04-13_liverpool_west-ham-united,2025-04-13,Liverpool,West Ham United,2,1,1,0,H
+2025-04-13_newcastle-united_manchester-united,2025-04-13,Newcastle United,Manchester United,4,1,1,1,H
+2025-04-13_wolverhampton-wanderers_tottenham-hotspur,2025-04-13,Wolverhampton Wanderers,Tottenham Hotspur,4,2,2,0,H
+2025-04-14_afc-bournemouth_fulham,2025-04-14,AFC Bournemouth,Fulham,1,0,1,0,H
+2025-04-16_newcastle-united_crystal-palace,2025-04-16,Newcastle United,Crystal Palace,5,0,4,0,H
+2025-04-19_aston-villa_newcastle-united,2025-04-19,Aston Villa,Newcastle United,4,1,1,1,H
+2025-04-19_brentford_brighton-hove-albion,2025-04-19,Brentford,Brighton & Hove Albion,4,2,1,1,H
+2025-04-19_crystal-palace_afc-bournemouth,2025-04-19,Crystal Palace,AFC Bournemouth,0,0,0,0,D
+2025-04-19_everton_manchester-city,2025-04-19,Everton,Manchester City,0,2,0,0,A
+2025-04-19_west-ham-united_southampton,2025-04-19,West Ham United,Southampton,1,1,0,0,D
+2025-04-20_fulham_chelsea,2025-04-20,Fulham,Chelsea,1,2,1,0,A
+2025-04-20_ipswich-town_arsenal,2025-04-20,Ipswich Town,Arsenal,0,4,0,2,A
+2025-04-20_leicester-city_liverpool,2025-04-20,Leicester City,Liverpool,0,1,0,0,A
+2025-04-20_manchester-united_wolverhampton-wanderers,2025-04-20,Manchester United,Wolverhampton Wanderers,0,1,0,0,A
+2025-04-21_tottenham-hotspur_nottingham-forest,2025-04-21,Tottenham Hotspur,Nottingham Forest,1,2,0,2,A
+2025-04-22_manchester-city_aston-villa,2025-04-22,Manchester City,Aston Villa,2,1,1,1,H
+2025-04-23_arsenal_crystal-palace,2025-04-23,Arsenal,Crystal Palace,2,2,2,1,D
+2025-04-26_brighton-hove-albion_west-ham-united,2025-04-26,Brighton & Hove Albion,West Ham United,3,2,1,0,H
+2025-04-26_chelsea_everton,2025-04-26,Chelsea,Everton,1,0,1,0,H
+2025-04-26_newcastle-united_ipswich-town,2025-04-26,Newcastle United,Ipswich Town,3,0,1,0,H
+2025-04-26_southampton_fulham,2025-04-26,Southampton,Fulham,1,2,1,0,A
+2025-04-26_wolverhampton-wanderers_leicester-city,2025-04-26,Wolverhampton Wanderers,Leicester City,3,0,1,0,H
+2025-04-27_afc-bournemouth_manchester-united,2025-04-27,AFC Bournemouth,Manchester United,1,1,1,0,D
+2025-04-27_liverpool_tottenham-hotspur,2025-04-27,Liverpool,Tottenham Hotspur,5,1,3,1,H
+2025-05-01_nottingham-forest_brentford,2025-05-01,Nottingham Forest,Brentford,0,2,0,1,A
+2025-05-02_manchester-city_wolverhampton-wanderers,2025-05-02,Manchester City,Wolverhampton Wanderers,1,0,1,0,H
+2025-05-03_arsenal_afc-bournemouth,2025-05-03,Arsenal,AFC Bournemouth,1,2,1,0,A
+2025-05-03_aston-villa_fulham,2025-05-03,Aston Villa,Fulham,1,0,1,0,H
+2025-05-03_everton_ipswich-town,2025-05-03,Everton,Ipswich Town,2,2,2,1,D
+2025-05-03_leicester-city_southampton,2025-05-03,Leicester City,Southampton,2,0,2,0,H
+2025-05-04_brentford_manchester-united,2025-05-04,Brentford,Manchester United,4,3,2,1,H
+2025-05-04_brighton-hove-albion_newcastle-united,2025-05-04,Brighton & Hove Albion,Newcastle United,1,1,1,0,D
+2025-05-04_chelsea_liverpool,2025-05-04,Chelsea,Liverpool,3,1,1,0,H
+2025-05-04_west-ham-united_tottenham-hotspur,2025-05-04,West Ham United,Tottenham Hotspur,1,1,1,1,D
+2025-05-05_crystal-palace_nottingham-forest,2025-05-05,Crystal Palace,Nottingham Forest,1,1,0,0,D
+2025-05-10_afc-bournemouth_aston-villa,2025-05-10,AFC Bournemouth,Aston Villa,0,1,0,1,A
+2025-05-10_fulham_everton,2025-05-10,Fulham,Everton,1,3,1,1,A
+2025-05-10_ipswich-town_brentford,2025-05-10,Ipswich Town,Brentford,0,1,0,1,A
+2025-05-10_southampton_manchester-city,2025-05-10,Southampton,Manchester City,0,0,0,0,D
+2025-05-10_wolverhampton-wanderers_brighton-hove-albion,2025-05-10,Wolverhampton Wanderers,Brighton & Hove Albion,0,2,0,1,A
+2025-05-11_liverpool_arsenal,2025-05-11,Liverpool,Arsenal,2,2,2,0,D
+2025-05-11_manchester-united_west-ham-united,2025-05-11,Manchester United,West Ham United,0,2,0,1,A
+2025-05-11_newcastle-united_chelsea,2025-05-11,Newcastle United,Chelsea,2,0,1,0,H
+2025-05-11_nottingham-forest_leicester-city,2025-05-11,Nottingham Forest,Leicester City,2,2,1,1,D
+2025-05-11_tottenham-hotspur_crystal-palace,2025-05-11,Tottenham Hotspur,Crystal Palace,0,2,0,1,A
+2025-05-16_aston-villa_tottenham-hotspur,2025-05-16,Aston Villa,Tottenham Hotspur,2,0,0,0,H
+2025-05-16_chelsea_manchester-united,2025-05-16,Chelsea,Manchester United,1,0,0,0,H
+2025-05-18_arsenal_newcastle-united,2025-05-18,Arsenal,Newcastle United,1,0,0,0,H
+2025-05-18_brentford_fulham,2025-05-18,Brentford,Fulham,2,3,2,1,A
+2025-05-18_everton_southampton,2025-05-18,Everton,Southampton,2,0,2,0,H
+2025-05-18_leicester-city_ipswich-town,2025-05-18,Leicester City,Ipswich Town,2,0,1,0,H
+2025-05-18_west-ham-united_nottingham-forest,2025-05-18,West Ham United,Nottingham Forest,1,2,0,1,A
+2025-05-19_brighton-hove-albion_liverpool,2025-05-19,Brighton & Hove Albion,Liverpool,3,2,1,2,H
+2025-05-20_crystal-palace_wolverhampton-wanderers,2025-05-20,Crystal Palace,Wolverhampton Wanderers,4,2,2,1,H
+2025-05-20_manchester-city_afc-bournemouth,2025-05-20,Manchester City,AFC Bournemouth,3,1,2,0,H
+2025-05-25_afc-bournemouth_leicester-city,2025-05-25,AFC Bournemouth,Leicester City,2,0,0,0,H
+2025-05-25_fulham_manchester-city,2025-05-25,Fulham,Manchester City,0,2,0,1,A
+2025-05-25_ipswich-town_west-ham-united,2025-05-25,Ipswich Town,West Ham United,1,3,0,1,A
+2025-05-25_liverpool_crystal-palace,2025-05-25,Liverpool,Crystal Palace,1,1,0,1,D
+2025-05-25_manchester-united_aston-villa,2025-05-25,Manchester United,Aston Villa,2,0,0,0,H
+2025-05-25_newcastle-united_everton,2025-05-25,Newcastle United,Everton,0,1,0,0,A
+2025-05-25_nottingham-forest_chelsea,2025-05-25,Nottingham Forest,Chelsea,0,1,0,0,A
+2025-05-25_southampton_arsenal,2025-05-25,Southampton,Arsenal,1,2,0,1,A
+2025-05-25_tottenham-hotspur_brighton-hove-albion,2025-05-25,Tottenham Hotspur,Brighton & Hove Albion,1,4,1,0,A
+2025-05-25_wolverhampton-wanderers_brentford,2025-05-25,Wolverhampton Wanderers,Brentford,1,1,0,1,D

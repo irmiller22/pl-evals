@@ -1,0 +1,5 @@
+# Preserve exact upstream bytes used by the ingestion checksum.
+app/data/source/2024-25-premierleague.txt -text
+*.csv text eol=lf
+*.py text eol=lf
+*.json text eol=lf

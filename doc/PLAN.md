@@ -1,8 +1,18 @@
 # Premier League AI Evals POC — Codex Build Plan
 
+## Implementation Status
+
+Phases 0–1 are implemented locally: project bootstrap, pinned 2024/25 OpenFootball ingestion, normalized 380-match snapshot, deterministic DuckDB repository, and constrained football tools. Tests use both the real snapshot and an independent hand-calculated synthetic fixture. `GET /health` and the CLI help/version entry points are available; the analyst, `/ask`, and evaluation execution are not implemented yet.
+
+Data source and semantics are documented in [app/data/README.md](../app/data/README.md). Average goals means goals scored by the team; comparison questions will compose tools; half-time outcome filtering is included. The full POC acceptance checklist below remains the completion gate. Files are prepared locally; repository commits and live evaluations have not been performed.
+
 ## 1. Objective
 
-Build a single-repository proof of concept that demonstrates a reusable AI evaluation framework against a hypothetical Premier League AI feature.
+Build a public, single-repository experiment that demonstrates a reusable AI evaluation framework using a Premier League match dataset and an assistant that queries it.
+
+The primary goal is to establish a baseline with an accessible starting model (for example, a configurable Sonnet model) and compare other models against that baseline on the same evaluation cases. "Entry-level" describes the chosen starting point for the experiment, not a provider tier or a claim about relative model capability. Exact model IDs remain configurable and must be recorded for every run.
+
+The experiment must reveal quality, latency, token, and cost tradeoffs. A candidate is not assumed to outperform the baseline, and a useful comparison may show improvements on some metrics and regressions on others.
 
 The POC must prove that the same evaluation suite can compare a baseline AI configuration with a candidate AI configuration and detect regressions in:
 
@@ -169,12 +179,15 @@ Do not skip ahead to GitHub Actions, dashboards, or reporting before the evaluat
 Create:
 
 - `pyproject.toml`
+- `Makefile` with setup, ingestion, test, typecheck, lint, format, format-check, compile, check, serve, and CLI help targets;
 - package structure;
 - `.gitignore`;
 - `.env.example`;
 - `README.md`.
 
 Add dependencies for the recommended stack.
+
+Use `make check` for the combined local validation set (lint, format check, mypy, pytest, compilation); all utility targets use the locked uv environment. Keep direct module entry points available.
 
 Expose these commands:
 
@@ -1549,9 +1562,9 @@ PASS
 
 ---
 
-## Scenario B — Better Candidate
+## Scenario B — Compare Another Model
 
-Switch candidate model.
+Switch the candidate model while keeping the selected cases and grading configuration the same. Improvement is not an acceptance requirement; accurately reporting the observed comparison is.
 
 Expected output includes:
 
@@ -1784,6 +1797,16 @@ output:
 # 18. Engineering Rules for Codex
 
 Follow these rules throughout implementation.
+
+## Public Repository and Reproducibility
+
+This is an independent public experiment, not an official Premier League project. Explain that positioning in the README.
+
+- Select a data source whose terms permit committing the normalized snapshot; document source attribution, season, and applicable redistribution terms before ingestion output is committed.
+- Keep credentials and local environment files out of version control. Provide placeholder configuration for contributors using their own accounts.
+- Review any artifacts intended for public sharing for secrets and provider/account metadata. Public artifact publication is separate from generating local reports.
+- Published comparisons must identify exact model IDs, configuration, dataset version, and run date, and describe results as observations on this evaluation suite rather than general model rankings.
+- Keep the baseline configurable so contributors can choose an accessible starting model and evaluate alternatives without changing cases or graders.
 
 ## Keep the POC Small
 
