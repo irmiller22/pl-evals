@@ -2,9 +2,9 @@
 
 ## Implementation Status
 
-Phases 0–2 are implemented locally: bootstrap, pinned 2024/25 dataset, deterministic football tools, typed answer/trace contracts, Anthropic Messages adapter, bounded analyst orchestration, and `POST /ask`. Unit and integration tests use independent football fixtures, scripted model responses, and mocked provider HTTP calls. `make check` runs all local validation.
+Phases 0–4 and the deterministic portion of Phases 5–7 are implemented locally: bootstrap, pinned 2024/25 dataset, deterministic football tools, typed answer/trace contracts, Anthropic Messages adapter, bounded analyst orchestration, `POST /ask`, evaluation contracts, in-process adapter, deterministic graders, JSONL loading, and resilient case execution. Unit and integration tests use independent football fixtures, scripted model responses, and mocked provider HTTP calls. `make check` runs all local validation.
 
-The model ID and credentials are configured by the user; live provider behavior and model comparison results have not been verified. Phases 3 onward remain pending. Phase 2's external-provider acceptance remains subject to a live check. Data source and semantics are documented in [app/data/README.md](../app/data/README.md); application setup is in the [README](../README.md).
+The LLM judge, complete evaluation suites, aggregate metrics, reports, baseline/candidate comparison, and CI remain pending. The model ID and credentials are configured by the user; live provider behavior and model comparison results have not been verified. Phase 2's external-provider acceptance remains subject to a live check. Data source and semantics are documented in [app/data/README.md](../app/data/README.md); application setup is in the [README](../README.md).
 
 The application accepts a per-service `ModelConfig` and prompt override so future baseline/candidate executions can be isolated. Anthropic is the initial provider; additional providers implement the same internal `ModelClient` protocol.
 

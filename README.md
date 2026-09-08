@@ -8,9 +8,9 @@ An assistant that answers questions about a completed Premier League season prov
 
 ## Project status
 
-Phases 0–2 of the [build plan](doc/PLAN.md) are implemented locally: the Python project, reproducible 2024/25 dataset, deterministic football tools, typed analyst responses, an Anthropic model adapter, and `POST /ask`.
+Phases 0–4 and the deterministic portion of Phase 5–7 of the [build plan](doc/PLAN.md) are implemented locally: the Python project, reproducible 2024/25 dataset, deterministic football tools, typed analyst responses, an Anthropic model adapter, `POST /ask`, evaluation contracts, an in-process adapter, deterministic graders, JSONL loading, and resilient case execution.
 
-The evaluation runner, graders, reports, and CI evaluations are still pending. The analyst is tested with scripted model responses and mocked provider HTTP calls; a live provider run has not been verified. No live model comparison results are available.
+The LLM judge, complete evaluation suites, aggregate metrics, reports, baseline/candidate comparison, and CI evaluations are still pending. The analyst and runner are tested with scripted model responses and mocked provider HTTP calls; a live provider run has not been verified. No live model comparison results are available.
 
 ## Get started
 
@@ -62,7 +62,7 @@ All environment-dependent targets use `uv` with `--locked`. `make check` does no
 
 ## Run the analyst
 
-Copy `.env.example` to `.env` and set `ANTHROPIC_API_KEY` and `APP_MODEL` to an exact Anthropic model ID available to your account. `APP_MODEL` falls back to `BASELINE_MODEL` when empty. A model ID may optionally start with `anthropic/`. The initial adapter supports Anthropic; other providers will require another implementation of `ModelClient`.
+Copy `.env.example` to `.env` and set `ANTHROPIC_API_KEY` and `APP_MODEL` to an exact Anthropic API model ID available to your account. Examples in the template include `claude-sonnet-5` as a balanced starting baseline, `claude-haiku-4-5-20251001` as a faster lower-cost comparison, and `claude-opus-4-8` as a stronger higher-cost comparison. Model IDs change and retire, so verify availability in your account. `APP_MODEL` falls back to `BASELINE_MODEL` when empty. A model ID may optionally start with `anthropic/`. The initial adapter supports Anthropic API IDs; Bedrock-style IDs and other providers will require another implementation of `ModelClient`.
 
 ```bash
 cp .env.example .env
@@ -84,7 +84,7 @@ The analyst validates final JSON against discriminated answer models and require
 
 `ModelConfig` provides a 30-second provider timeout, 120-second application deadline, at most two transient retries, eight model turns, and eight tool calls. In-process callers can override these limits and the system prompt independently for each service. Latency spans model requests, retries, and tool work inside the service; HTTP setup is excluded. Usage aggregates reported tokens across completed model responses, including cache tokens; if a response omits usage, the aggregate is unavailable. Usage from requests that fail before returning a response cannot be measured. Read-only tool work already running in a thread may finish after a request deadline.
 
-The provider wire format follows the [Anthropic Messages API](https://platform.claude.com/docs/en/api/messages/create) and [tool-call lifecycle](https://platform.claude.com/docs/en/agents-and-tools/tool-use/handle-tool-calls).
+The provider wire format follows the [Anthropic Messages API](https://platform.claude.com/docs/en/api/messages/create) and [tool-call lifecycle](https://platform.claude.com/docs/en/agents-and-tools/tool-use/handle-tool-calls). The template also shows planned OpenAI examples such as `gpt-5.4`, `gpt-5-mini`, and `gpt-5-nano`; the OpenAI adapter has not been implemented yet. See the [OpenAI models overview](https://developers.openai.com/api/docs/models) for current IDs and availability.
 
 ## Example application
 
