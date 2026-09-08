@@ -59,6 +59,8 @@ Repeated development commands are available through the Makefile:
 | `make check` | Run lint, formatting checks, type checks, tests, and compilation. |
 | `make serve` | Start the local API. |
 | `make cli` | Display evaluation CLI help. |
+| `make eval-run DATASET=smoke` | Run one configured model and write a run artifact. |
+| `make eval-compare BASELINE_RUN=... CANDIDATE_RUN=...` | Compare two run artifacts. |
 
 All environment-dependent targets use `uv` with `--locked`. `make check` does not reformat files or make paid model calls. Override the executable with `make UV=/path/to/uv check` when needed.
 
@@ -108,20 +110,20 @@ Published results should identify the exact baseline and candidate model IDs, co
 
 ## Evaluation commands
 
-`evals run` executes one configured model against a selected JSONL dataset and writes a `run.json` artifact. It requires the model and provider credentials referenced by `evals/eval.yaml`:
+`make eval-run` executes one configured model against a selected JSONL dataset and writes a `run.json` artifact. It requires the model and provider credentials referenced by `evals/eval.yaml`:
 
 ```bash
 cp .env.example .env
 # Set BASELINE_MODEL and the matching provider API key in .env.
-evals run --dataset smoke
+make eval-run DATASET=smoke
 ```
 
-`evals compare` compares two stored run artifacts by case ID and writes `comparison.json` and `report.md`:
+`make eval-compare` compares two stored run artifacts by case ID and writes `comparison.json` and `report.md`. It does not make model calls:
 
 ```bash
-evals compare \
-  .evals/runs/<baseline-run-id>/run.json \
-  .evals/runs/<candidate-run-id>/run.json
+make eval-compare \
+  BASELINE_RUN=.evals/runs/<baseline-run-id>/run.json \
+  CANDIDATE_RUN=.evals/runs/<candidate-run-id>/run.json
 ```
 
 The paired runner API is available for programmatic baseline/candidate execution; CLI wiring for one command that launches both configurations, policy enforcement, and judge configuration is still pending. Runs involving cases with `groundedness` require injecting the configured LLM judge; otherwise that grade is recorded as unavailable/error rather than silently passing.
