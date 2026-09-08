@@ -1,6 +1,18 @@
-"""Thin HTTP interface. The analyst endpoint arrives with the model integration."""
+"""Thin HTTP interface with request-scoped provider connections."""
 
-from fastapi import FastAPI
+import os
+from collections.abc import AsyncIterator
+from typing import Annotated
+
+import httpx
+from fastapi import Depends, FastAPI, HTTPException
+
+from app.agent.model import AnthropicClient
+from app.agent.service import AgentError, AnalystService
+from app.agent.types import AskRequest, AskResponse
+from app.config import ModelConfig
+from app.football.repository import FootballRepository
+from app.football.tools import FootballTools
 
 app = FastAPI(title="Premier League AI Evals POC", version="0.1.0")
 
@@ -8,3 +20,37 @@ app = FastAPI(title="Premier League AI Evals POC", version="0.1.0")
 @app.get("/health")
 def health() -> dict[str, str]:
     return {"status": "ok"}
+
+
+async def get_service() -> AsyncIterator[AnalystService]:
+    try:
+        config = ModelConfig.from_env()
+        key = os.environ.get("ANTHROPIC_API_KEY", "")
+        if not key.strip():
+            raise ValueError("Set ANTHROPIC_API_KEY to enable the analyst")
+    except ValueError:
+        raise HTTPException(
+            503, "Configure APP_MODEL (or BASELINE_MODEL) and ANTHROPIC_API_KEY"
+        ) from None
+    async with httpx.AsyncClient() as http:
+        yield AnalystService(
+            AnthropicClient(key, http), FootballTools(FootballRepository()), config
+        )
+
+
+@app.post("/ask", response_model=AskResponse)
+async def ask(
+    request: AskRequest, service: Annotated[AnalystService, Depends(get_service)]
+) -> AskResponse:
+    try:
+        return await service.ask(request)
+    except AgentError as error:
+        raise HTTPException(
+            504 if error.code == "timeout" else 502,
+            detail={
+                "code": error.code,
+                "message": str(error),
+                "partial_output": error.partial_output,
+                "attempts": error.attempts,
+            },
+        ) from None

@@ -2,9 +2,11 @@
 
 ## Implementation Status
 
-Phases 0–1 are implemented locally: project bootstrap, pinned 2024/25 OpenFootball ingestion, normalized 380-match snapshot, deterministic DuckDB repository, and constrained football tools. Tests use both the real snapshot and an independent hand-calculated synthetic fixture. `GET /health` and the CLI help/version entry points are available; the analyst, `/ask`, and evaluation execution are not implemented yet.
+Phases 0–4 and the deterministic portion of Phases 5–7 are implemented locally: bootstrap, pinned 2024/25 dataset, deterministic football tools, typed answer/trace contracts, Anthropic Messages adapter, bounded analyst orchestration, `POST /ask`, evaluation contracts, in-process adapter, deterministic graders, JSONL loading, and resilient case execution. Unit and integration tests use independent football fixtures, scripted model responses, and mocked provider HTTP calls. `make check` runs all local validation.
 
-Data source and semantics are documented in [app/data/README.md](../app/data/README.md). Average goals means goals scored by the team; comparison questions will compose tools; half-time outcome filtering is included. The full POC acceptance checklist below remains the completion gate. Files are prepared locally; repository commits and live evaluations have not been performed.
+The LLM judge, complete evaluation suites, aggregate metrics, reports, baseline/candidate comparison, and CI remain pending. The model ID and credentials are configured by the user; live provider behavior and model comparison results have not been verified. Phase 2's external-provider acceptance remains subject to a live check. Data source and semantics are documented in [app/data/README.md](../app/data/README.md); application setup is in the [README](../README.md).
+
+The application accepts a per-service `ModelConfig` and prompt override so future baseline/candidate executions can be isolated. Anthropic is the initial provider; additional providers implement the same internal `ModelClient` protocol.
 
 ## 1. Objective
 
@@ -487,6 +489,11 @@ For the POC, implement at least one actual provider.
 
 Keep provider-specific logic isolated here.
 
+This provider hookup is separate from running evaluations. Credentials are not
+required for ordinary tests or for building the evaluation framework. The
+initial provider may be exercised manually through `/ask` as soon as Phase 2
+is complete; the first live eval requires the Phase 3–7 contracts below.
+
 ### Acceptance Criteria
 
 Changing the configured model must not require changes to:
@@ -716,6 +723,10 @@ class Grader(Protocol):
 Graders must be independent.
 
 One grader failure must not prevent other graders from executing unless execution itself failed.
+
+Deterministic graders must run without a live judge. The LLM judge requires a
+separately configured live judge model only when groundedness or other
+subjective graders are enabled.
 
 ---
 
@@ -1136,6 +1147,13 @@ Capture:
 ### Acceptance Criteria
 
 Two runs can be compared using their stored JSON artifacts.
+
+Phases 3–7 are the minimum path for a first live single-model evaluation:
+models, application adapter, graders, datasets, and runner. Build and test
+these phases with fakes first, then enable provider credentials for a small
+smoke run. A useful baseline/candidate comparison additionally requires
+Phases 8–12 for metrics, paired execution, policy checks, reports, and CLI.
+Do not require live credentials for the normal unit/integration test suite.
 
 ---
 
