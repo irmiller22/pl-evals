@@ -1,0 +1,33 @@
+version: 1
+
+project:
+  name: premier-league-evals-poc
+
+datasets:
+  smoke:
+    - evals/datasets/smoke.jsonl
+  golden:
+    - evals/datasets/golden.jsonl
+    - evals/datasets/unsupported.jsonl
+    - evals/datasets/adversarial.jsonl
+
+execution:
+  concurrency: 1
+  repetitions: 1
+
+baseline:
+  model: ${BASELINE_MODEL}
+  temperature: 0
+
+candidate:
+  model: ${CANDIDATE_MODEL}
+  temperature: 0
+
+judge:
+  model: ${JUDGE_MODEL}
+  temperature: 0
+
+output:
+  directory: .evals/runs
+  markdown: true
+  json: true
