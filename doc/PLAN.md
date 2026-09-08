@@ -489,6 +489,11 @@ For the POC, implement at least one actual provider.
 
 Keep provider-specific logic isolated here.
 
+This provider hookup is separate from running evaluations. Credentials are not
+required for ordinary tests or for building the evaluation framework. The
+initial provider may be exercised manually through `/ask` as soon as Phase 2
+is complete; the first live eval requires the Phase 3–7 contracts below.
+
 ### Acceptance Criteria
 
 Changing the configured model must not require changes to:
@@ -718,6 +723,10 @@ class Grader(Protocol):
 Graders must be independent.
 
 One grader failure must not prevent other graders from executing unless execution itself failed.
+
+Deterministic graders must run without a live judge. The LLM judge requires a
+separately configured live judge model only when groundedness or other
+subjective graders are enabled.
 
 ---
 
@@ -1138,6 +1147,13 @@ Capture:
 ### Acceptance Criteria
 
 Two runs can be compared using their stored JSON artifacts.
+
+Phases 3–7 are the minimum path for a first live single-model evaluation:
+models, application adapter, graders, datasets, and runner. Build and test
+these phases with fakes first, then enable provider credentials for a small
+smoke run. A useful baseline/candidate comparison additionally requires
+Phases 8–12 for metrics, paired execution, policy checks, reports, and CLI.
+Do not require live credentials for the normal unit/integration test suite.
 
 ---
 
