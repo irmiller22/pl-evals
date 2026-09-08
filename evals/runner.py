@@ -75,10 +75,17 @@ def failure_grades(names: Iterable[str], *, status: str, reason: str) -> list[Gr
     ]
 
 
-async def grade_case(case: EvalCase, output: EvalOutput) -> list[Grade]:
+async def grade_case(
+    case: EvalCase, output: EvalOutput, graders: dict[str, Grader] | None = None
+) -> list[Grade]:
+    registry = graders or GRADERS
     grades: list[Grade] = []
-    for name in effective_graders(case):
-        grader = GRADERS[name]
+    names = effective_graders(case)
+    unknown = set(names) - set(registry)
+    if unknown:
+        raise ValueError(f"Unknown grader(s) for {case.id}: {sorted(unknown)}")
+    for name in names:
+        grader = registry[name]
         try:
             grade = await grader.grade(case, output)
             grades.append(grade)
@@ -96,7 +103,12 @@ async def grade_case(case: EvalCase, output: EvalOutput) -> list[Grade]:
 
 
 async def run_cases(
-    cases: list[EvalCase], adapter: Adapter, model_config: ModelConfig, *, concurrency: int = 1
+    cases: list[EvalCase],
+    adapter: Adapter,
+    model_config: ModelConfig,
+    *,
+    concurrency: int = 1,
+    graders: dict[str, Grader] | None = None,
 ) -> list[CaseResult]:
     if concurrency < 1:
         raise ValueError("concurrency must be at least 1")
@@ -132,7 +144,10 @@ async def run_cases(
                     grades=failure_grades(names, status="skipped", reason="adapter_error"),
                 )
             return CaseResult(
-                case=case, status="completed", output=output, grades=await grade_case(case, output)
+                case=case,
+                status="completed",
+                output=output,
+                grades=await grade_case(case, output, graders),
             )
 
     return await asyncio.gather(*(run_one(case) for case in cases))
