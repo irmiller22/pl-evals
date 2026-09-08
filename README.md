@@ -1,14 +1,64 @@
 # Premier League AI Evals POC
 
-A single-repository proof of concept for a reusable AI evaluation framework, demonstrated through an assistant that answers questions about a completed Premier League season using structured match data.
+A public experiment in evaluating and comparing AI models using a Premier League match dataset. The project will establish a baseline with an accessible starting model, then run the same evaluations against other models to measure differences in quality, speed, token usage, and estimated cost.
 
-The framework will compare baseline and candidate AI configurations to detect regressions in answer correctness, tool use, groundedness, abstention, latency, token usage, and estimated cost.
+The baseline is configurable: a Sonnet model is one possible starting point, rather than a fixed requirement or a claim about model rankings. Candidate models may perform better or worse on different measures. The goal is to make those tradeoffs visible through reproducible cases and per-case evidence.
+
+An assistant that answers questions about a completed Premier League season provides the test application. The evaluation framework will measure answer correctness, tool use, groundedness, and abstention alongside performance and cost.
 
 ## Project status
 
-The project is in the planning stage. The application, evaluation framework, datasets, and CI workflow have not been implemented yet. The [build plan](doc/PLAN.md) defines the implementation phases, contracts, and acceptance criteria.
+Implementation has started with the repository bootstrap and deterministic football layer (phases 0–1 of the [build plan](doc/PLAN.md)). Available now: a locked Python environment, reproducible ingestion, the complete 2024/25 match snapshot, DuckDB queries, constrained football tools, a health endpoint, and unit/integration tests.
 
-The season, public data source, model provider, and default models remain to be selected. Setup instructions and executable commands will be added as implementation lands.
+The AI analyst, `/ask` endpoint, evaluation runner, graders, reports, and CI evaluations are still pending. Model providers and exact baseline/candidate/judge models have not yet been configured. No live model comparison results are available.
+
+## Get started
+
+Requires Python 3.12+, `uv`, and `make`. From the repository root:
+
+```bash
+make setup
+make ingest
+make check
+make cli
+make serve
+```
+
+The server listens at `http://127.0.0.1:8000`; `GET /health` returns `{"status":"ok"}`. The evaluation CLI currently exposes `version` only. No API key is needed for these commands. `.env.example` reserves placeholders for future model integration; it is not loaded by the current bootstrap.
+
+The included [dataset documentation](app/data/README.md) identifies the pinned OpenFootball source, CC0 license, checksums, normalization rules, and query semantics. Ingestion runs offline by default; `--download` retrieves the same pinned source again.
+
+To call a deterministic tool directly:
+
+```python
+from app.football.repository import FootballRepository
+from app.football.tools import FootballTools
+
+tools = FootballTools(FootballRepository())
+result = tools.execute("count_team_matches", {
+    "team": "Manchester United", "venue": "away", "result": "win",
+})
+print(result.model_dump())  # Value, contributing match IDs, and normalized arguments.
+```
+
+Repeated development commands are available through the Makefile:
+
+| Command | Purpose |
+| --- | --- |
+| `make` / `make help` | List available targets. |
+| `make setup` | Install the locked development dependencies. |
+| `make ingest` | Regenerate match data from the included source. |
+| `make test` | Run offline unit and integration tests. |
+| `make typecheck` | Run mypy on application, evaluation, and script code. |
+| `make lint` | Check Ruff lint rules without changing files. |
+| `make format` | Apply Ruff formatting. |
+| `make format-check` | Check formatting without changing files. |
+| `make compile` | Verify application and evaluation modules compile. |
+| `make check` | Run lint, formatting checks, type checks, tests, and compilation. |
+| `make serve` | Start the local API. |
+| `make cli` | Display evaluation CLI help. |
+
+All environment-dependent targets use `uv` with `--locked`. `make check` does not reformat files or make paid model calls. Override the executable with `make UV=/path/to/uv check` when needed.
 
 ## Example application
 
@@ -21,6 +71,12 @@ The assistant will answer questions such as:
 Factual answers must come from constrained, deterministic football tools backed by the loaded season. The assistant must abstain when the data cannot answer a question, such as a request for player goal totals when only match-level statistics are available.
 
 Each response will include answer text, a typed structured answer, attempted tool calls, full tool execution traces, evidence IDs, and available usage and latency measurements. Traces will retain validated arguments and complete tool results so graders can assess whether the answer is supported.
+
+## Public repository expectations
+
+The repository will include evaluation definitions, reproducible data preparation, and documentation so others can run comparisons with their own model credentials. Only data permitted for redistribution will be committed, with source attribution, season, and applicable terms documented. Credentials and local environment files must stay out of version control; any published run artifacts must be reviewed for secrets and provider/account metadata.
+
+Published results should identify the exact baseline and candidate model IDs, configuration, dataset version, and run date. Findings describe performance on this suite and configuration; they are not a general ranking of model capability. This is an independent experiment, not an official Premier League project.
 
 ## Planned architecture
 
@@ -61,11 +117,9 @@ Comparisons will classify cases as both passing, both failing, baseline-only pas
 These commands describe the intended interface; they are not available yet:
 
 ```bash
-python -m app.main
 python -m evals.cli run --dataset smoke
 python -m evals.cli compare
 python -m evals.cli report <run-id>
-pytest
 ```
 
 The API will expose `POST /ask` and `GET /health`. Evaluation artifacts will be written under `.evals/runs/<run-id>/` as `run.json` and `report.md`.
