@@ -61,9 +61,9 @@ def load_cases(
     return cases, hashlib.sha256(b"\n".join(raw_lines)).hexdigest()
 
 
-def effective_graders(case: EvalCase) -> list[str]:
+def effective_graders(case: EvalCase, available: set[str] | None = None) -> list[str]:
     names = list(dict.fromkeys([*case.graders, "schema", "abstention"]))
-    unknown = set(names) - set(GRADERS)
+    unknown = set(names) - (available if available is not None else set(GRADERS))
     if unknown:
         raise ValueError(f"Unknown grader(s) for {case.id}: {sorted(unknown)}")
     return names
@@ -80,11 +80,19 @@ async def grade_case(
 ) -> list[Grade]:
     registry = graders or GRADERS
     grades: list[Grade] = []
-    names = effective_graders(case)
-    unknown = set(names) - set(registry)
-    if unknown:
-        raise ValueError(f"Unknown grader(s) for {case.id}: {sorted(unknown)}")
+    names = effective_graders(case, set(registry) | {"groundedness"})
     for name in names:
+        if name not in registry:
+            grades.append(
+                Grade(
+                    grader=name,
+                    status="error",
+                    score=0,
+                    passed=False,
+                    reason="Grader is not configured",
+                )
+            )
+            continue
         grader = registry[name]
         try:
             grade = await grader.grade(case, output)
@@ -114,8 +122,10 @@ async def run_cases(
         raise ValueError("concurrency must be at least 1")
     semaphore = asyncio.Semaphore(concurrency)
 
+    registry = graders or GRADERS
+
     async def run_one(case: EvalCase) -> CaseResult:
-        names = effective_graders(case)
+        names = effective_graders(case, set(registry) | {"groundedness"})
         async with semaphore:
             try:
                 output = await adapter.run(case, model_config)

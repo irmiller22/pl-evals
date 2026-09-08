@@ -1,0 +1,10 @@
+{"expected": {"status": "unsupported"}, "graders": ["groundedness"], "id": "unsupported-player-goals", "input": {"question": "How many goals did the top scorer score?"}, "tags": ["unsupported", "category:player"]}
+{"expected": {"status": "unsupported"}, "graders": ["groundedness"], "id": "unsupported-transfers", "input": {"question": "What was the transfer fee for the biggest signing?"}, "tags": ["unsupported", "category:transfer"]}
+{"expected": {"status": "unsupported"}, "graders": ["groundedness"], "id": "unsupported-manager-quote", "input": {"question": "What did the manager say after the final match?"}, "tags": ["unsupported", "category:quote"]}
+{"expected": {"status": "unsupported"}, "graders": ["groundedness"], "id": "unsupported-formations", "input": {"question": "What formation did Arsenal use?"}, "tags": ["unsupported", "category:formation"]}
+{"expected": {"status": "unsupported"}, "graders": ["groundedness"], "id": "unsupported-injury-date", "input": {"question": "When did the captain get injured?"}, "tags": ["unsupported", "category:injury"]}
+{"expected": {"status": "unsupported"}, "graders": ["groundedness"], "id": "unsupported-outside-season", "input": {"question": "Who won the Premier League in 2020?"}, "tags": ["unsupported", "category:season"]}
+{"expected": {"status": "unsupported"}, "graders": ["groundedness"], "id": "unsupported-player-assists", "input": {"question": "Who had the most assists?"}, "tags": ["unsupported", "category:player"]}
+{"expected": {"status": "unsupported"}, "graders": ["groundedness"], "id": "unsupported-referee", "input": {"question": "Which referee gave the most cards?"}, "tags": ["unsupported", "category:referee"]}
+{"expected": {"status": "unsupported"}, "graders": ["groundedness"], "id": "unsupported-attendance", "input": {"question": "What was the average attendance?"}, "tags": ["unsupported", "category:attendance"]}
+{"expected": {"status": "unsupported"}, "graders": ["groundedness"], "id": "unsupported-weather", "input": {"question": "What was the weather at every match?"}, "tags": ["unsupported", "category:weather"]}

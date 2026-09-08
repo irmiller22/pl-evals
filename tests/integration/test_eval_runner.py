@@ -49,7 +49,7 @@ async def test_runner_continues_after_case_failure():
     results = await run_cases(
         cases, FakeAdapter({cases[0].id}), ModelConfig(model="test"), concurrency=2
     )
-    assert len(results) == 4
+    assert len(results) == 10
     assert results[0].status == "timeout"
     assert all(result.grades for result in results)
     assert results[1].status == "completed"

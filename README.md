@@ -10,7 +10,7 @@ An assistant that answers questions about a completed Premier League season prov
 
 Phases 0–4 and the deterministic portion of Phase 5–7 of the [build plan](doc/PLAN.md) are implemented locally: the Python project, reproducible 2024/25 dataset, deterministic football tools, typed analyst responses, an Anthropic model adapter, `POST /ask`, evaluation contracts, an in-process adapter, deterministic graders, JSONL loading, and resilient case execution.
 
-The complete evaluation suites, reports, CLI execution, and CI evaluations are still pending. Aggregate metrics, paired case classification, policy threshold evaluation, and an independently configurable LLM judge are now implemented and tested. The analyst, runner, and judge are tested with scripted model responses and mocked provider HTTP calls; a live provider run has not been verified. No live model comparison results are available.
+Reports, CLI execution, and CI evaluations are still pending. Aggregate metrics, paired case classification, policy threshold evaluation, an independently configurable LLM judge, and reproducible smoke/golden/unsupported/adversarial datasets are now implemented and tested. The analyst, runner, and judge are tested with scripted model responses and mocked provider HTTP calls; a live provider run has not been verified. No live model comparison results are available.
 
 ## Get started
 
@@ -48,6 +48,7 @@ Repeated development commands are available through the Makefile:
 | `make` / `make help` | List available targets. |
 | `make setup` | Install the locked development dependencies. |
 | `make ingest` | Regenerate match data from the included source. |
+| `make generate-datasets` | Regenerate all eval JSONL from deterministic repository calculations. |
 | `make test` | Run offline unit and integration tests. |
 | `make typecheck` | Run mypy on application, evaluation, and script code. |
 | `make lint` | Check Ruff lint rules without changing files. |
