@@ -3,7 +3,7 @@
 UV ?= uv
 PYTHON_DIRS := app evals scripts tests
 
-.PHONY: help setup ingest test typecheck lint format format-check compile check serve cli
+.PHONY: help setup ingest generate-datasets test typecheck lint format format-check compile check serve cli
 
 help: ## Show available commands
 	@awk 'BEGIN {FS = ":.*## "} /^[a-zA-Z_-]+:.*## / {printf "  %-15s %s\n", $$1, $$2}' $(MAKEFILE_LIST)
@@ -13,6 +13,9 @@ setup: ## Install the locked development environment
 
 ingest: ## Rebuild the normalized CSV from the pinned local source
 	$(UV) run --locked python -m scripts.ingest_dataset
+
+generate-datasets: ## Generate eval JSONL from deterministic repository calculations
+	$(UV) run --locked python -m scripts.generate_eval_cases
 
 test: ## Run offline unit and integration tests
 	$(UV) run --locked pytest
