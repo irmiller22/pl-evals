@@ -8,9 +8,9 @@ An assistant that answers questions about a completed Premier League season prov
 
 ## Project status
 
-Implementation has started with the repository bootstrap and deterministic football layer (phases 0–1 of the [build plan](doc/PLAN.md)). Available now: a locked Python environment, reproducible ingestion, the complete 2024/25 match snapshot, DuckDB queries, constrained football tools, a health endpoint, and unit/integration tests.
+Phases 0–2 of the [build plan](doc/PLAN.md) are implemented locally: the Python project, reproducible 2024/25 dataset, deterministic football tools, typed analyst responses, an Anthropic model adapter, and `POST /ask`.
 
-The AI analyst, `/ask` endpoint, evaluation runner, graders, reports, and CI evaluations are still pending. Model providers and exact baseline/candidate/judge models have not yet been configured. No live model comparison results are available.
+The evaluation runner, graders, reports, and CI evaluations are still pending. The analyst is tested with scripted model responses and mocked provider HTTP calls; a live provider run has not been verified. No live model comparison results are available.
 
 ## Get started
 
@@ -24,7 +24,7 @@ make cli
 make serve
 ```
 
-The server listens at `http://127.0.0.1:8000`; `GET /health` returns `{"status":"ok"}`. The evaluation CLI currently exposes `version` only. No API key is needed for these commands. `.env.example` reserves placeholders for future model integration; it is not loaded by the current bootstrap.
+The server listens at `http://127.0.0.1:8000`; `GET /health` returns `{"status":"ok"}`. The evaluation CLI currently exposes `version` only. No API key is needed for tests, ingestion, CLI help, or the health endpoint. `make serve` loads `.env` when present; direct Python execution reads exported environment variables.
 
 The included [dataset documentation](app/data/README.md) identifies the pinned OpenFootball source, CC0 license, checksums, normalization rules, and query semantics. Ingestion runs offline by default; `--download` retrieves the same pinned source again.
 
@@ -59,6 +59,32 @@ Repeated development commands are available through the Makefile:
 | `make cli` | Display evaluation CLI help. |
 
 All environment-dependent targets use `uv` with `--locked`. `make check` does not reformat files or make paid model calls. Override the executable with `make UV=/path/to/uv check` when needed.
+
+## Run the analyst
+
+Copy `.env.example` to `.env` and set `ANTHROPIC_API_KEY` and `APP_MODEL` to an exact Anthropic model ID available to your account. `APP_MODEL` falls back to `BASELINE_MODEL` when empty. A model ID may optionally start with `anthropic/`. The initial adapter supports Anthropic; other providers will require another implementation of `ModelClient`.
+
+```bash
+cp .env.example .env
+# Edit .env with your model ID and API key.
+make serve
+```
+
+In another terminal:
+
+```bash
+curl -X POST http://127.0.0.1:8000/ask \
+  -H 'Content-Type: application/json' \
+  -d '{"question":"How many away matches did Manchester United win?"}'
+```
+
+Requests to `/ask` make paid model calls. `/docs` exposes the request and response schemas. Missing model configuration returns HTTP 503; invalid questions return 422; provider/answer failures return 502; the application deadline returns 504. Execution failures include a sanitized code and partial trace rather than a fabricated unsupported answer.
+
+The analyst validates final JSON against discriminated answer models and requires a successful tool execution for factual answers. It preserves requested and validated arguments, complete tool outputs, and contributing match IDs. Unsupported questions can return an explicit reason without calling a tool. Semantic correctness and agreement between prose and structured values will be checked by the evaluation graders in later phases.
+
+`ModelConfig` provides a 30-second provider timeout, 120-second application deadline, at most two transient retries, eight model turns, and eight tool calls. In-process callers can override these limits and the system prompt independently for each service. Latency spans model requests, retries, and tool work inside the service; HTTP setup is excluded. Usage aggregates reported tokens across completed model responses, including cache tokens; if a response omits usage, the aggregate is unavailable. Usage from requests that fail before returning a response cannot be measured. Read-only tool work already running in a thread may finish after a request deadline.
+
+The provider wire format follows the [Anthropic Messages API](https://platform.claude.com/docs/en/api/messages/create) and [tool-call lifecycle](https://platform.claude.com/docs/en/agents-and-tools/tool-use/handle-tool-calls).
 
 ## Example application
 
@@ -122,7 +148,7 @@ python -m evals.cli compare
 python -m evals.cli report <run-id>
 ```
 
-The API will expose `POST /ask` and `GET /health`. Evaluation artifacts will be written under `.evals/runs/<run-id>/` as `run.json` and `report.md`.
+The API exposes `POST /ask` and `GET /health`. Evaluation artifacts will be written under `.evals/runs/<run-id>/` as `run.json` and `report.md`.
 
 Model names and credentials will come from configuration or environment variables. Normal tests will use mocks or fakes and will not require paid API calls. The planned GitHub Actions workflow will run tests and smoke evaluations, upload artifacts, and fail when policy checks fail; full golden comparisons will be manually triggerable. The live-model behavior of PR evaluations still needs to be decided.
 

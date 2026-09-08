@@ -35,7 +35,7 @@ compile: ## Verify application and evaluation modules compile
 check: lint format-check typecheck test compile ## Run all local validation checks
 
 serve: ## Start the local API on 127.0.0.1:8000
-	$(UV) run --locked python -m app.main
+	$(UV) run --locked $(if $(wildcard .env),--env-file .env) python -m app.main
 
 cli: ## Show evaluation CLI help
 	$(UV) run --locked python -m evals.cli --help

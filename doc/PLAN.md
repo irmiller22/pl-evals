@@ -2,9 +2,11 @@
 
 ## Implementation Status
 
-Phases 0–1 are implemented locally: project bootstrap, pinned 2024/25 OpenFootball ingestion, normalized 380-match snapshot, deterministic DuckDB repository, and constrained football tools. Tests use both the real snapshot and an independent hand-calculated synthetic fixture. `GET /health` and the CLI help/version entry points are available; the analyst, `/ask`, and evaluation execution are not implemented yet.
+Phases 0–2 are implemented locally: bootstrap, pinned 2024/25 dataset, deterministic football tools, typed answer/trace contracts, Anthropic Messages adapter, bounded analyst orchestration, and `POST /ask`. Unit and integration tests use independent football fixtures, scripted model responses, and mocked provider HTTP calls. `make check` runs all local validation.
 
-Data source and semantics are documented in [app/data/README.md](../app/data/README.md). Average goals means goals scored by the team; comparison questions will compose tools; half-time outcome filtering is included. The full POC acceptance checklist below remains the completion gate. Files are prepared locally; repository commits and live evaluations have not been performed.
+The model ID and credentials are configured by the user; live provider behavior and model comparison results have not been verified. Phases 3 onward remain pending. Phase 2's external-provider acceptance remains subject to a live check. Data source and semantics are documented in [app/data/README.md](../app/data/README.md); application setup is in the [README](../README.md).
+
+The application accepts a per-service `ModelConfig` and prompt override so future baseline/candidate executions can be isolated. Anthropic is the initial provider; additional providers implement the same internal `ModelClient` protocol.
 
 ## 1. Objective
 
