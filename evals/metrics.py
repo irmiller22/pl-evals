@@ -141,6 +141,8 @@ def compare(baseline: EvalRun, candidate: EvalRun) -> dict[str, Any]:
 
     base_metrics, cand_metrics = aggregate(baseline), aggregate(candidate)
     return {
+        "baseline_model": baseline.model,
+        "candidate_model": candidate.model,
         "baseline": base_metrics,
         "candidate": cand_metrics,
         "case_deltas": [delta.__dict__ for delta in deltas],

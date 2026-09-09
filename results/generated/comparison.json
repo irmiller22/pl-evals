@@ -71,6 +71,7 @@
       "output_total": 1795
     }
   },
+  "baseline_model": "claude-haiku-4-5-20251001",
   "candidate": {
     "case_count": 10,
     "completed_cases": 10,
@@ -140,6 +141,7 @@
       "output_total": 3223
     }
   },
+  "candidate_model": "claude-sonnet-5",
   "case_deltas": [
     {
       "baseline_passed": false,
