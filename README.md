@@ -65,6 +65,7 @@ Repeated development commands are available through the Makefile:
 | `make cli` | Display evaluation CLI help. |
 | `make eval-run ROLE=baseline DATASET=smoke` | Run the configured baseline or candidate model and write a run artifact. |
 | `make eval-compare BASELINE_RUN=... CANDIDATE_RUN=...` | Compare two run artifacts. |
+| `make generate-results BASELINE_RUN=... CANDIDATE_RUN=...` | Generate a publishable comparison under `results/generated/`. |
 
 All environment-dependent targets use `uv` with `--locked`. `make check` does not reformat files or make paid model calls. Override the executable with `make UV=/path/to/uv check` when needed.
 
@@ -126,6 +127,14 @@ make eval-run ROLE=baseline DATASET=smoke
 
 ```bash
 make eval-compare \
+  BASELINE_RUN=.evals/runs/<baseline-run-id>/run.json \
+  CANDIDATE_RUN=.evals/runs/<candidate-run-id>/run.json
+```
+
+`make generate-results` runs the same deterministic comparison and writes the generated artifacts under `results/generated/`, making it suitable for publishing a reviewed result from recorded runs:
+
+```bash
+make generate-results \
   BASELINE_RUN=.evals/runs/<baseline-run-id>/run.json \
   CANDIDATE_RUN=.evals/runs/<candidate-run-id>/run.json
 ```

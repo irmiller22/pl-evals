@@ -156,6 +156,16 @@ def compare(baseline: EvalRun, candidate: EvalRun) -> dict[str, Any]:
                 base_metrics["cost_usd"]["average_per_request"],
                 cand_metrics["cost_usd"]["average_per_request"],
             ),
+            "input_tokens": _delta(
+                base_metrics["tokens"]["input_total"], cand_metrics["tokens"]["input_total"]
+            ),
+            "output_tokens": _delta(
+                base_metrics["tokens"]["output_total"], cand_metrics["tokens"]["output_total"]
+            ),
+            "average_tokens_per_request": _delta(
+                base_metrics["tokens"]["average_total_per_request"],
+                cand_metrics["tokens"]["average_total_per_request"],
+            ),
         },
     }
 

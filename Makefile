@@ -8,8 +8,9 @@ COMPARE_OUTPUT ?= .evals/comparisons
 CASE_ID ?=
 TAG ?=
 ROLE ?= baseline
+RESULTS_OUTPUT ?= results/generated
 
-.PHONY: help setup ingest generate-datasets test typecheck lint format format-check compile check serve cli eval-run eval-compare
+.PHONY: help setup ingest generate-datasets test typecheck lint format format-check compile check serve cli eval-run eval-compare generate-results
 
 help: ## Show available commands
 	@awk 'BEGIN {FS = ":.*## "} /^[a-zA-Z_-]+:.*## / {printf "  %-15s %s\n", $$1, $$2}' $(MAKEFILE_LIST)
@@ -56,3 +57,8 @@ eval-compare: ## Compare artifacts (BASELINE_RUN=... CANDIDATE_RUN=...)
 	@test -n "$(BASELINE_RUN)" || (echo "Set BASELINE_RUN to a baseline run.json path" >&2; exit 1)
 	@test -n "$(CANDIDATE_RUN)" || (echo "Set CANDIDATE_RUN to a candidate run.json path" >&2; exit 1)
 	$(UV) run --locked python -m evals.cli compare "$(BASELINE_RUN)" "$(CANDIDATE_RUN)" --output "$(COMPARE_OUTPUT)"
+
+generate-results: ## Generate public comparison results (BASELINE_RUN=... CANDIDATE_RUN=...)
+	@test -n "$(BASELINE_RUN)" || (echo "Set BASELINE_RUN to a baseline run.json path" >&2; exit 1)
+	@test -n "$(CANDIDATE_RUN)" || (echo "Set CANDIDATE_RUN to a candidate run.json path" >&2; exit 1)
+	$(UV) run --locked python -m evals.cli compare "$(BASELINE_RUN)" "$(CANDIDATE_RUN)" --output "$(RESULTS_OUTPUT)"
