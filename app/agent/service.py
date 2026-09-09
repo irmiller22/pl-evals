@@ -1,6 +1,7 @@
 """Bounded model/tool orchestration, with complete evidence and partial failure traces."""
 
 import asyncio
+import re
 from time import perf_counter
 
 from pydantic import ValidationError
@@ -30,6 +31,19 @@ class AgentError(Exception):
         self.attempts = attempts
 
 
+def parse_final_answer(text: str) -> FinalAnswer:
+    """Parse JSON answers even when a model wraps them in explanatory markdown."""
+    candidate = text.strip()
+    fenced = re.search(r"```(?:json)?\s*(\{.*\})\s*```", candidate, re.DOTALL)
+    if fenced:
+        candidate = fenced.group(1)
+    else:
+        start, end = candidate.find("{"), candidate.rfind("}")
+        if start >= 0 and end > start:
+            candidate = candidate[start : end + 1]
+    return FinalAnswer.model_validate_json(candidate)
+
+
 class AnalystService:
     def __init__(
         self,
@@ -49,6 +63,7 @@ class AnalystService:
         trace: list[ToolExecution] = []
         input_tokens = output_tokens = 0
         usage_known = True
+        last_model_text: str | None = None
 
         def partial() -> dict:
             return {
@@ -58,6 +73,7 @@ class AnalystService:
                 "usage": {"input_tokens": input_tokens, "output_tokens": output_tokens}
                 if usage_known
                 else None,
+                "last_model_text": last_model_text,
             }
 
         try:
@@ -78,6 +94,7 @@ class AnalystService:
                     else:
                         input_tokens += response.usage.input_tokens
                         output_tokens += response.usage.output_tokens
+                    last_model_text = response.text
                     if response.tool_calls:
                         ids = [call.call_id for call in calls + response.tool_calls]
                         if len(ids) != len(set(ids)):
@@ -143,7 +160,7 @@ class AnalystService:
                             )
                         messages.append(Message(role="user", tool_results=replies))
                         continue
-                    final = FinalAnswer.model_validate_json(response.text)
+                    final = parse_final_answer(response.text)
                     if final.structured_answer.status == "answered" and not any(
                         item.status == "success" for item in trace
                     ):

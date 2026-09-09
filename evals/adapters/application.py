@@ -3,6 +3,7 @@
 import os
 from collections.abc import AsyncIterator
 from contextlib import asynccontextmanager
+from pathlib import Path
 
 import httpx
 
@@ -12,6 +13,7 @@ from app.agent.types import AskRequest
 from app.config import ModelConfig
 from app.football.repository import FootballRepository
 from app.football.tools import FootballTools
+from evals.graders.llm_judge import LLMJudgeGrader
 from evals.models import EvalCase, EvalOutput
 from evals.pricing import Price, estimate_cost, price_for
 
@@ -84,3 +86,17 @@ async def adapter_for_model(model: ModelConfig) -> AsyncIterator[ApplicationAdap
     else:
         async with anthropic_adapter() as adapter:
             yield adapter
+
+
+@asynccontextmanager
+async def judge_for_model(model: ModelConfig, rubric_path: Path) -> AsyncIterator[LLMJudgeGrader]:
+    """Create a live LLM judge using the provider selected by its model ID."""
+    model_name = model.model.removeprefix("anthropic/")
+    is_openai = model.model.startswith("openai/") or model_name.startswith(("gpt-", "o"))
+    key_name = "OPENAI_API_KEY" if is_openai else "ANTHROPIC_API_KEY"
+    key = os.environ.get(key_name, "")
+    if not key.strip():
+        raise ValueError(f"Set {key_name} before running the configured LLM judge")
+    client_type = OpenAIClient if is_openai else AnthropicClient
+    async with httpx.AsyncClient() as http:
+        yield LLMJudgeGrader(client_type(key, http), model, rubric_path.read_text(encoding="utf-8"))

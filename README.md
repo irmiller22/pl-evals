@@ -29,6 +29,10 @@ The server listens at `http://127.0.0.1:8000`; `GET /health` returns `{"status":
 
 The included [dataset documentation](app/data/README.md) identifies the pinned OpenFootball source, CC0 license, checksums, normalization rules, and query semantics. Ingestion runs offline by default; `--download` retrieves the same pinned source again.
 
+Expected token volumes and an example baseline/candidate cost estimate are documented in [doc/TOKEN_USAGE.md](doc/TOKEN_USAGE.md).
+
+Sanitized live run summaries are published under [results/](results/).
+
 To call a deterministic tool directly:
 
 ```python
@@ -59,7 +63,7 @@ Repeated development commands are available through the Makefile:
 | `make check` | Run lint, formatting checks, type checks, tests, and compilation. |
 | `make serve` | Start the local API. |
 | `make cli` | Display evaluation CLI help. |
-| `make eval-run DATASET=smoke` | Run one configured model and write a run artifact. |
+| `make eval-run ROLE=baseline DATASET=smoke` | Run the configured baseline or candidate model and write a run artifact. |
 | `make eval-compare BASELINE_RUN=... CANDIDATE_RUN=...` | Compare two run artifacts. |
 
 All environment-dependent targets use `uv` with `--locked`. `make check` does not reformat files or make paid model calls. Override the executable with `make UV=/path/to/uv check` when needed.
@@ -115,7 +119,7 @@ Published results should identify the exact baseline and candidate model IDs, co
 ```bash
 cp .env.example .env
 # Set BASELINE_MODEL and the matching provider API key in .env.
-make eval-run DATASET=smoke
+make eval-run ROLE=baseline DATASET=smoke
 ```
 
 `make eval-compare` compares two stored run artifacts by case ID and writes `comparison.json` and `report.md`. It does not make model calls:
@@ -126,7 +130,7 @@ make eval-compare \
   CANDIDATE_RUN=.evals/runs/<candidate-run-id>/run.json
 ```
 
-The paired runner API is available for programmatic baseline/candidate execution; CLI wiring for one command that launches both configurations, policy enforcement, and judge configuration is still pending. Runs involving cases with `groundedness` require injecting the configured LLM judge; otherwise that grade is recorded as unavailable/error rather than silently passing.
+The paired runner API is available for programmatic baseline/candidate execution; CLI wiring for one command that launches both configurations and policy enforcement is still pending. Use `--role baseline` or `--role candidate` with `evals run` (or `ROLE=baseline/candidate` with `make eval-run`) to execute either configured model. When `JUDGE_MODEL` is configured, `evals run` automatically injects the LLM judge for cases with `groundedness`. Without a judge model, that grade is recorded as unavailable/error rather than silently passing.
 
 ## Planned architecture
 

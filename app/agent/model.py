@@ -97,7 +97,6 @@ class AnthropicClient:
             "system": system,
             "messages": wire_messages,
             "max_tokens": config.max_tokens,
-            "temperature": config.temperature,
             "tools": [
                 {
                     "name": tool.name,
@@ -107,6 +106,18 @@ class AnthropicClient:
                 for tool in tools
             ],
         }
+        # Claude 4.7+ and Sonnet 5 reject non-default temperature values.
+        if not model.startswith(
+            (
+                "claude-sonnet-5",
+                "claude-opus-4-7",
+                "claude-opus-4-8",
+                "claude-opus-5",
+                "claude-fable-5",
+                "claude-mythos-5",
+            )
+        ):
+            payload["temperature"] = config.temperature
         for attempt in range(config.max_retries + 1):
             delay = config.retry_backoff_seconds * (2**attempt)
             try:
@@ -149,6 +160,10 @@ class AnthropicClient:
                     calls.append(
                         ToolCall(name=block["name"], arguments=block["input"], call_id=block["id"])
                     )
+                elif block["type"] in {"thinking", "redacted_thinking"}:
+                    # Newer Claude models may include reasoning blocks. They are
+                    # provider metadata and must not be treated as final answer text.
+                    continue
                 else:
                     raise ValueError("Unsupported provider content block")
             usage = None

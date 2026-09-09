@@ -5,6 +5,9 @@ PYTHON_DIRS := app evals scripts tests
 DATASET ?= smoke
 CONFIG ?= evals/eval.yaml
 COMPARE_OUTPUT ?= .evals/comparisons
+CASE_ID ?=
+TAG ?=
+ROLE ?= baseline
 
 .PHONY: help setup ingest generate-datasets test typecheck lint format format-check compile check serve cli eval-run eval-compare
 
@@ -46,8 +49,8 @@ serve: ## Start the local API on 127.0.0.1:8000
 cli: ## Show evaluation CLI help
 	$(UV) run --locked python -m evals.cli --help
 
-eval-run: ## Run one configured model (DATASET=smoke, CONFIG=evals/eval.yaml)
-	$(UV) run --locked python -m evals.cli run --dataset "$(DATASET)" --config "$(CONFIG)"
+eval-run: ## Run one configured model (ROLE=baseline/candidate, DATASET=smoke)
+	$(UV) run --locked $(if $(wildcard .env),--env-file .env) python -m evals.cli run --dataset "$(DATASET)" --config "$(CONFIG)" --role "$(ROLE)" $(if $(CASE_ID),--case-id "$(CASE_ID)",) $(if $(TAG),--tag "$(TAG)",)
 
 eval-compare: ## Compare artifacts (BASELINE_RUN=... CANDIDATE_RUN=...)
 	@test -n "$(BASELINE_RUN)" || (echo "Set BASELINE_RUN to a baseline run.json path" >&2; exit 1)

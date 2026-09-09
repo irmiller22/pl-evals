@@ -172,10 +172,13 @@ async def run_dataset(
     case_id: str | None = None,
     concurrency: int = 1,
     run_id: str | None = None,
+    graders: dict[str, Grader] | None = None,
 ) -> EvalRun:
     cases, dataset_hash = load_cases(paths, tag=tag, case_id=case_id)
     started = datetime.now(UTC)
-    results = await run_cases(cases, adapter, model_config, concurrency=concurrency)
+    results = await run_cases(
+        cases, adapter, model_config, concurrency=concurrency, graders=graders
+    )
     return EvalRun(
         run_id=run_id or uuid.uuid4().hex,
         model=model_config.model,
