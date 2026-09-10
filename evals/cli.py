@@ -10,7 +10,7 @@ from evals.metrics import aggregate, compare
 from evals.reporting.console import print_summary
 from evals.reporting.json_report import read_run, write_comparison, write_run
 from evals.reporting.markdown import write_comparison_report
-from evals.runner import run_dataset
+from evals.runner import GRADERS, run_dataset
 
 app = typer.Typer(no_args_is_help=True, help="Premier League model evaluation tools.")
 
@@ -32,24 +32,42 @@ def version() -> None:
 def run(
     dataset: str = typer.Option("smoke"),
     config: Path = typer.Option(Path("evals/eval.yaml"), exists=True),  # noqa: B008
+    role: str = typer.Option("baseline", help="Configured model role: baseline or candidate."),
     tag: str | None = typer.Option(None),
     case_id: str | None = typer.Option(None),
 ) -> None:
-    """Run one configured model against a JSONL dataset."""
+    """Run one configured baseline or candidate model against a JSONL dataset."""
     settings = EvalConfig.load(config)
-    model = settings.model("baseline")
-    from evals.adapters.application import anthropic_adapter
+    if role not in {"baseline", "candidate"}:
+        raise typer.BadParameter("Role must be baseline or candidate", param_hint="--role")
+    model = settings.model(role)
+    from evals.adapters.application import adapter_for_model, judge_for_model
+
+    judge_model = settings.optional_model("judge")
+    rubric = config.parent / "rubrics" / "groundedness.md"
 
     async def execute() -> None:
-        async with anthropic_adapter() as adapter:
-            result = await run_dataset(
-                settings.datasets(dataset),
-                adapter,
-                model,
-                tag=tag,
-                case_id=case_id,
-                concurrency=settings.data.get("execution", {}).get("concurrency", 1),
-            )
+        async with adapter_for_model(model) as adapter:
+            if judge_model is None:
+                result = await run_dataset(
+                    settings.datasets(dataset),
+                    adapter,
+                    model,
+                    tag=tag,
+                    case_id=case_id,
+                    concurrency=settings.data.get("execution", {}).get("concurrency", 1),
+                )
+            else:
+                async with judge_for_model(judge_model, rubric) as judge:
+                    result = await run_dataset(
+                        settings.datasets(dataset),
+                        adapter,
+                        model,
+                        tag=tag,
+                        case_id=case_id,
+                        concurrency=settings.data.get("execution", {}).get("concurrency", 1),
+                        graders={**GRADERS, "groundedness": judge},
+                    )
         directory = (
             Path(settings.data.get("output", {}).get("directory", ".evals/runs")) / result.run_id
         )

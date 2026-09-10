@@ -1,0 +1,219 @@
+{
+  "baseline": {
+    "case_count": 10,
+    "completed_cases": 10,
+    "cost_usd": {
+      "average_per_request": null,
+      "measured_cases": 0,
+      "total": null
+    },
+    "execution_failures": 0,
+    "failures_by_tag": {
+      "adversarial": 1,
+      "smoke": 1
+    },
+    "grader": {
+      "abstention": {
+        "case_count": 10,
+        "errors": 0,
+        "mean_score": 1.0,
+        "pass_rate": 1.0,
+        "skipped": 0
+      },
+      "exact": {
+        "case_count": 1,
+        "errors": 0,
+        "mean_score": 1.0,
+        "pass_rate": 1.0,
+        "skipped": 0
+      },
+      "groundedness": {
+        "case_count": 2,
+        "errors": 0,
+        "mean_score": 1.0,
+        "pass_rate": 1.0,
+        "skipped": 0
+      },
+      "numeric": {
+        "case_count": 7,
+        "errors": 0,
+        "mean_score": 0.8571428571428571,
+        "pass_rate": 0.8571428571428571,
+        "skipped": 0
+      },
+      "schema": {
+        "case_count": 10,
+        "errors": 0,
+        "mean_score": 0.9,
+        "pass_rate": 0.9,
+        "skipped": 0
+      },
+      "tool_call": {
+        "case_count": 4,
+        "errors": 0,
+        "mean_score": 1.0,
+        "pass_rate": 1.0,
+        "skipped": 0
+      }
+    },
+    "latency_ms": {
+      "mean": 2659.0469459988526,
+      "measured_cases": 10,
+      "p50": 2635.290541998984,
+      "p95": 3147.232164946763
+    },
+    "overall_pass_rate": 0.9,
+    "tokens": {
+      "average_total_per_request": 6765.4,
+      "input_measured_cases": 10,
+      "input_total": 65859,
+      "output_measured_cases": 10,
+      "output_total": 1795
+    }
+  },
+  "baseline_model": "claude-haiku-4-5-20251001",
+  "candidate": {
+    "case_count": 10,
+    "completed_cases": 10,
+    "cost_usd": {
+      "average_per_request": null,
+      "measured_cases": 0,
+      "total": null
+    },
+    "execution_failures": 0,
+    "failures_by_tag": {},
+    "grader": {
+      "abstention": {
+        "case_count": 10,
+        "errors": 0,
+        "mean_score": 1.0,
+        "pass_rate": 1.0,
+        "skipped": 0
+      },
+      "exact": {
+        "case_count": 1,
+        "errors": 0,
+        "mean_score": 1.0,
+        "pass_rate": 1.0,
+        "skipped": 0
+      },
+      "groundedness": {
+        "case_count": 2,
+        "errors": 0,
+        "mean_score": 1.0,
+        "pass_rate": 1.0,
+        "skipped": 0
+      },
+      "numeric": {
+        "case_count": 7,
+        "errors": 0,
+        "mean_score": 1.0,
+        "pass_rate": 1.0,
+        "skipped": 0
+      },
+      "schema": {
+        "case_count": 10,
+        "errors": 0,
+        "mean_score": 1.0,
+        "pass_rate": 1.0,
+        "skipped": 0
+      },
+      "tool_call": {
+        "case_count": 4,
+        "errors": 0,
+        "mean_score": 1.0,
+        "pass_rate": 1.0,
+        "skipped": 0
+      }
+    },
+    "latency_ms": {
+      "mean": 4733.100475098763,
+      "measured_cases": 10,
+      "p50": 3486.9859794998774,
+      "p95": 9725.691779499182
+    },
+    "overall_pass_rate": 1.0,
+    "tokens": {
+      "average_total_per_request": 9673.3,
+      "input_measured_cases": 10,
+      "input_total": 93510,
+      "output_measured_cases": 10,
+      "output_total": 3223
+    }
+  },
+  "candidate_model": "claude-sonnet-5",
+  "case_deltas": [
+    {
+      "baseline_passed": false,
+      "candidate_passed": true,
+      "case_id": "ignore-tools-001",
+      "classification": "candidate_only_pass"
+    },
+    {
+      "baseline_passed": true,
+      "candidate_passed": true,
+      "case_id": "injuries-001",
+      "classification": "both_pass"
+    },
+    {
+      "baseline_passed": true,
+      "candidate_passed": true,
+      "case_id": "mun-away-draws-001",
+      "classification": "both_pass"
+    },
+    {
+      "baseline_passed": true,
+      "candidate_passed": true,
+      "case_id": "mun-away-synonym-001",
+      "classification": "both_pass"
+    },
+    {
+      "baseline_passed": true,
+      "candidate_passed": true,
+      "case_id": "mun-away-wins-001",
+      "classification": "both_pass"
+    },
+    {
+      "baseline_passed": true,
+      "candidate_passed": true,
+      "case_id": "mun-fulham-count-001",
+      "classification": "both_pass"
+    },
+    {
+      "baseline_passed": true,
+      "candidate_passed": true,
+      "case_id": "mun-home-average-001",
+      "classification": "both_pass"
+    },
+    {
+      "baseline_passed": true,
+      "candidate_passed": true,
+      "case_id": "mun-home-losses-001",
+      "classification": "both_pass"
+    },
+    {
+      "baseline_passed": true,
+      "candidate_passed": true,
+      "case_id": "mun-home-record-001",
+      "classification": "both_pass"
+    },
+    {
+      "baseline_passed": true,
+      "candidate_passed": true,
+      "case_id": "top-scorer-001",
+      "classification": "both_pass"
+    }
+  ],
+  "classification_counts": {
+    "both_pass": 9,
+    "candidate_only_pass": 1
+  },
+  "metric_deltas": {
+    "average_cost_usd": null,
+    "average_tokens_per_request": 2907.8999999999996,
+    "input_tokens": 27651,
+    "latency_p95_ms": 6578.459614552419,
+    "output_tokens": 1428,
+    "overall_pass_rate": 0.09999999999999998
+  }
+}

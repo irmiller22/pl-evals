@@ -2,8 +2,15 @@
 
 UV ?= uv
 PYTHON_DIRS := app evals scripts tests
+DATASET ?= smoke
+CONFIG ?= evals/eval.yaml
+COMPARE_OUTPUT ?= .evals/comparisons
+CASE_ID ?=
+TAG ?=
+ROLE ?= baseline
+RESULTS_OUTPUT ?= results/generated
 
-.PHONY: help setup ingest generate-datasets test typecheck lint format format-check compile check serve cli
+.PHONY: help setup ingest generate-datasets test typecheck lint format format-check compile check serve cli eval-run eval-compare generate-results
 
 help: ## Show available commands
 	@awk 'BEGIN {FS = ":.*## "} /^[a-zA-Z_-]+:.*## / {printf "  %-15s %s\n", $$1, $$2}' $(MAKEFILE_LIST)
@@ -42,3 +49,16 @@ serve: ## Start the local API on 127.0.0.1:8000
 
 cli: ## Show evaluation CLI help
 	$(UV) run --locked python -m evals.cli --help
+
+eval-run: ## Run one configured model (ROLE=baseline/candidate, DATASET=smoke)
+	$(UV) run --locked $(if $(wildcard .env),--env-file .env) python -m evals.cli run --dataset "$(DATASET)" --config "$(CONFIG)" --role "$(ROLE)" $(if $(CASE_ID),--case-id "$(CASE_ID)",) $(if $(TAG),--tag "$(TAG)",)
+
+eval-compare: ## Compare artifacts (BASELINE_RUN=... CANDIDATE_RUN=...)
+	@test -n "$(BASELINE_RUN)" || (echo "Set BASELINE_RUN to a baseline run.json path" >&2; exit 1)
+	@test -n "$(CANDIDATE_RUN)" || (echo "Set CANDIDATE_RUN to a candidate run.json path" >&2; exit 1)
+	$(UV) run --locked python -m evals.cli compare "$(BASELINE_RUN)" "$(CANDIDATE_RUN)" --output "$(COMPARE_OUTPUT)"
+
+generate-results: ## Generate public comparison results (BASELINE_RUN=... CANDIDATE_RUN=...)
+	@test -n "$(BASELINE_RUN)" || (echo "Set BASELINE_RUN to a baseline run.json path" >&2; exit 1)
+	@test -n "$(CANDIDATE_RUN)" || (echo "Set CANDIDATE_RUN to a candidate run.json path" >&2; exit 1)
+	$(UV) run --locked python -m evals.cli compare "$(BASELINE_RUN)" "$(CANDIDATE_RUN)" --output "$(RESULTS_OUTPUT)"

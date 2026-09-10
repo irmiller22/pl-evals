@@ -97,7 +97,6 @@ class AnthropicClient:
             "system": system,
             "messages": wire_messages,
             "max_tokens": config.max_tokens,
-            "temperature": config.temperature,
             "tools": [
                 {
                     "name": tool.name,
@@ -107,6 +106,18 @@ class AnthropicClient:
                 for tool in tools
             ],
         }
+        # Claude 4.7+ and Sonnet 5 reject non-default temperature values.
+        if not model.startswith(
+            (
+                "claude-sonnet-5",
+                "claude-opus-4-7",
+                "claude-opus-4-8",
+                "claude-opus-5",
+                "claude-fable-5",
+                "claude-mythos-5",
+            )
+        ):
+            payload["temperature"] = config.temperature
         for attempt in range(config.max_retries + 1):
             delay = config.retry_backoff_seconds * (2**attempt)
             try:
@@ -149,6 +160,10 @@ class AnthropicClient:
                     calls.append(
                         ToolCall(name=block["name"], arguments=block["input"], call_id=block["id"])
                     )
+                elif block["type"] in {"thinking", "redacted_thinking"}:
+                    # Newer Claude models may include reasoning blocks. They are
+                    # provider metadata and must not be treated as final answer text.
+                    continue
                 else:
                     raise ValueError("Unsupported provider content block")
             usage = None
@@ -167,6 +182,140 @@ class AnthropicClient:
                 raise ValueError("Stop reason disagrees with tool calls")
             return result
         except (ValueError, KeyError, TypeError):
+            raise ModelError(
+                "invalid_model_response",
+                "Model returned an invalid or incomplete response",
+                attempts,
+            ) from None
+
+
+class OpenAIClient:
+    """OpenAI Responses API client implementing the provider-neutral contract."""
+
+    def __init__(self, api_key: str, http: httpx.AsyncClient):
+        if not api_key.strip():
+            raise ValueError("Set OPENAI_API_KEY to enable OpenAI models")
+        self._api_key = api_key
+        self._http = http
+
+    async def complete(
+        self,
+        *,
+        system: str,
+        messages: list[Message],
+        tools: list[ToolDefinition],
+        config: ModelConfig,
+    ) -> ModelResponse:
+        model = config.model.removeprefix("openai/")
+        items: list[dict] = []
+        for message in messages:
+            if message.role == "user" and message.tool_results:
+                items.extend(
+                    {
+                        "type": "function_call_output",
+                        "call_id": item.call_id,
+                        "output": json.dumps(item.content),
+                    }
+                    for item in message.tool_results
+                )
+            elif message.role == "assistant" and message.tool_calls:
+                items.extend(
+                    {
+                        "type": "function_call",
+                        "call_id": call.call_id,
+                        "name": call.name,
+                        "arguments": json.dumps(call.arguments),
+                    }
+                    for call in message.tool_calls
+                )
+                if message.text:
+                    items.append({"role": "assistant", "content": message.text})
+            elif message.text:
+                items.append({"role": message.role, "content": message.text})
+        payload = {
+            "model": model,
+            "instructions": system,
+            "input": items,
+            "temperature": config.temperature,
+            "max_output_tokens": config.max_tokens,
+            "parallel_tool_calls": False,
+            "text": {"format": {"type": "json_object"}},
+            "tools": [
+                {
+                    "type": "function",
+                    "name": tool.name,
+                    "description": tool.description,
+                    "parameters": tool.parameters,
+                    "strict": True,
+                }
+                for tool in tools
+            ],
+        }
+        for attempt in range(config.max_retries + 1):
+            delay = config.retry_backoff_seconds * (2**attempt)
+            try:
+                response = await self._http.post(
+                    "https://api.openai.com/v1/responses",
+                    json=payload,
+                    headers={"Authorization": f"Bearer {self._api_key}"},
+                    timeout=config.provider_timeout_seconds,
+                )
+            except httpx.TransportError:
+                error = ModelError(
+                    "provider_transport", "Model request could not complete", attempt + 1
+                )
+            else:
+                if response.is_success:
+                    return self._parse(response, attempt + 1)
+                error = ModelError(
+                    "provider_http",
+                    f"Model provider returned HTTP {response.status_code}",
+                    attempt + 1,
+                )
+                if response.status_code != 429 and response.status_code < 500:
+                    raise error
+                delay = retry_delay(response.headers.get("retry-after"), delay)
+            if attempt == config.max_retries:
+                raise error
+            await asyncio.sleep(delay)
+        raise AssertionError("Unreachable retry state")
+
+    @staticmethod
+    def _parse(response: httpx.Response, attempts: int) -> ModelResponse:
+        try:
+            body = response.json()
+            calls: list[ToolCall] = []
+            texts: list[str] = []
+            for item in body["output"]:
+                if item["type"] == "function_call":
+                    calls.append(
+                        ToolCall(
+                            name=item["name"],
+                            arguments=json.loads(item["arguments"]),
+                            call_id=item["call_id"],
+                        )
+                    )
+                elif item["type"] == "message":
+                    texts.extend(
+                        part["text"]
+                        for part in item.get("content", [])
+                        if part.get("type") == "output_text"
+                    )
+                else:
+                    raise ValueError("Unsupported provider output item")
+            usage = None
+            if body.get("usage") is not None:
+                usage = TokenUsage(
+                    input_tokens=body["usage"]["input_tokens"],
+                    output_tokens=body["usage"]["output_tokens"],
+                )
+            return ModelResponse(
+                text="".join(texts),
+                tool_calls=calls,
+                usage=usage,
+                stop_reason="tool_use" if calls else "end_turn",
+            )
+        except (ValueError, KeyError, TypeError, json.JSONDecodeError):
             raise ModelError(
                 "invalid_model_response",
                 "Model returned an invalid or incomplete response",

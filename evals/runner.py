@@ -172,10 +172,13 @@ async def run_dataset(
     case_id: str | None = None,
     concurrency: int = 1,
     run_id: str | None = None,
+    graders: dict[str, Grader] | None = None,
 ) -> EvalRun:
     cases, dataset_hash = load_cases(paths, tag=tag, case_id=case_id)
     started = datetime.now(UTC)
-    results = await run_cases(cases, adapter, model_config, concurrency=concurrency)
+    results = await run_cases(
+        cases, adapter, model_config, concurrency=concurrency, graders=graders
+    )
     return EvalRun(
         run_id=run_id or uuid.uuid4().hex,
         model=model_config.model,
@@ -183,4 +186,45 @@ async def run_dataset(
         started_at=started,
         completed_at=datetime.now(UTC),
         cases=results,
+    )
+
+
+async def run_paired(
+    paths: Iterable[Path],
+    baseline_adapter: Adapter,
+    candidate_adapter: Adapter,
+    baseline_config: ModelConfig,
+    candidate_config: ModelConfig,
+    *,
+    tag: str | None = None,
+    case_id: str | None = None,
+    concurrency: int = 1,
+    metadata: dict | None = None,
+) -> tuple[EvalRun, EvalRun]:
+    """Run identical selected cases with independent configurations."""
+    cases, dataset_hash = load_cases(paths, tag=tag, case_id=case_id)
+    baseline_cases, candidate_cases = await asyncio.gather(
+        run_cases(cases, baseline_adapter, baseline_config, concurrency=concurrency),
+        run_cases(cases, candidate_adapter, candidate_config, concurrency=concurrency),
+    )
+    common = metadata or {}
+    return (
+        EvalRun(
+            run_id=uuid.uuid4().hex,
+            model=baseline_config.model,
+            dataset_hash=dataset_hash,
+            started_at=datetime.now(UTC),
+            completed_at=datetime.now(UTC),
+            cases=baseline_cases,
+            metadata={"role": "baseline", **common, "model_config": baseline_config.model_dump()},
+        ),
+        EvalRun(
+            run_id=uuid.uuid4().hex,
+            model=candidate_config.model,
+            dataset_hash=dataset_hash,
+            started_at=datetime.now(UTC),
+            completed_at=datetime.now(UTC),
+            cases=candidate_cases,
+            metadata={"role": "candidate", **common, "model_config": candidate_config.model_dump()},
+        ),
     )

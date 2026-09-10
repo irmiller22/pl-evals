@@ -52,6 +52,9 @@ def _metric_value(metrics: dict[str, Any], name: str) -> float | None:
         "overall_pass_rate": ("overall_pass_rate",),
         "latency_p95_ms": ("latency_ms", "p95"),
         "average_cost_usd": ("cost_usd", "average_per_request"),
+        "input_tokens": ("tokens", "input_total"),
+        "output_tokens": ("tokens", "output_total"),
+        "average_tokens_per_request": ("tokens", "average_total_per_request"),
     }
     value: Any = metrics
     for key in mapping[name]:

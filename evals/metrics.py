@@ -141,6 +141,8 @@ def compare(baseline: EvalRun, candidate: EvalRun) -> dict[str, Any]:
 
     base_metrics, cand_metrics = aggregate(baseline), aggregate(candidate)
     return {
+        "baseline_model": baseline.model,
+        "candidate_model": candidate.model,
         "baseline": base_metrics,
         "candidate": cand_metrics,
         "case_deltas": [delta.__dict__ for delta in deltas],
@@ -155,6 +157,16 @@ def compare(baseline: EvalRun, candidate: EvalRun) -> dict[str, Any]:
             "average_cost_usd": _delta(
                 base_metrics["cost_usd"]["average_per_request"],
                 cand_metrics["cost_usd"]["average_per_request"],
+            ),
+            "input_tokens": _delta(
+                base_metrics["tokens"]["input_total"], cand_metrics["tokens"]["input_total"]
+            ),
+            "output_tokens": _delta(
+                base_metrics["tokens"]["output_total"], cand_metrics["tokens"]["output_total"]
+            ),
+            "average_tokens_per_request": _delta(
+                base_metrics["tokens"]["average_total_per_request"],
+                cand_metrics["tokens"]["average_total_per_request"],
             ),
         },
     }

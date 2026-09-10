@@ -39,6 +39,12 @@ class EvalConfig:
             raise ValueError(f"Missing {name} model configuration")
         return ModelConfig.model_validate(data)
 
+    def optional_model(self, name: str) -> ModelConfig | None:
+        data = self.data.get(name)
+        if not isinstance(data, dict) or not str(data.get("model", "")).strip():
+            return None
+        return ModelConfig.model_validate(data)
+
 
 def expand_env(value: Any) -> Any:
     if isinstance(value, str):
